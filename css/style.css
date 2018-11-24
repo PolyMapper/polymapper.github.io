@@ -1,0 +1,35 @@
+/* this makes the map a full page */
+/*
+ html, body, #mapid {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+  }
+ */
+
+ /* this makes the only 600*400 */
+ /*
+#mapid {
+	position: absolute;
+ 	width: 600px; 
+ 	height: 400px;
+ }
+ */
+
+ /* setting absolute location*/
+ /*
+#mapid {
+	position: absolute;
+ 	width: 600px; 
+ 	height: 600px;
+ 	left: 100px;
+ 	top: 150px;
+ }
+  */
+
+ /* Relative centre*/
+#mapid {
+ 	margin: 0 auto;
+    width: 600px;
+    height: 600px;
+ }
