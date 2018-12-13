@@ -9,7 +9,7 @@ var counties = $.ajax({
 });
 
 var motorways = $.ajax({
-  url: "https://gist.githubusercontent.com/maptastik/df8e483d5ac1c6cae3dc4a7c02ea9039/raw/ff9897d53ee19a92e4393d23c87aa6d305e6b247/kyMotorwaysSimplified.geojson",
+  url: "https://raw.githubusercontent.com/PolyMapper/polymapper.github.io/master/StarterMapMultSplit/raw/kyMotorwaysSimplified.geojson",
   dataType: "json",
   success: console.log("County data successfully loaded."),
   error: function(xhr) {
