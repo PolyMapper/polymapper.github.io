@@ -1,4 +1,8 @@
-var mymap = L.map('mapid').setView([37.8, -96], 4);
+
+<script type="text/javascript" src="Alert.js"></script>
+//alert("Hello\nHow are you?");
+
+﻿var mymap = L.map('mapid').setView([37.8, -96], 4);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 	maxZoom: 18,
@@ -8,5 +12,5 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	id: 'mapbox.streets'
 }).addTo(mymap);
 
-var statesData = new L.GeoJSON.AJAX("data/us-states.js");
+var statesData = new L.GeoJSON.AJAX("/data/map.geojson");
 statesData.addTo(mymap);
