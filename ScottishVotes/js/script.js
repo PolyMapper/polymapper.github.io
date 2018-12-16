@@ -22,22 +22,7 @@ function style(feature) {
     };
 }
 
-function highlightFeature(e) {
-    var layer = e.target;
 
-    layer.setStyle({
-        weight: 5,
-        color: '#666',
-        dashArray: '',
-        fillOpacity: 0.7
-    });
-
-    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-    }
-	
-	info.update(layer.feature.properties);
-}
 
 /* DATA REQUESTS */
 var ScottishVotes = $.ajax({
@@ -70,6 +55,23 @@ $.when(ScottishVotes).done(function() {
 	style: style,
 	onEachFeature: onEachFeature
   }).addTo(map);
+  function highlightFeature(e) {
+	  var layer = e.target;
+
+      layer.setStyle({
+          weight: 5,
+          color: '#666',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+      }
+	
+	  info.update(layer.feature.properties);
+  }
+  
   function resetHighlight(e) {
 	  geoScottishVotes.resetStyle(e.target);
 	  info.update();
@@ -98,11 +100,31 @@ $.when(ScottishVotes).done(function() {
 
   // method that we will use to update the control based on feature properties passed
   info.update = function (props) {
-      this._div.innerHTML = '<h4>US Population Density</h4>' +  (props ?
-          '<b>' + props.name + '</b><br />' + props.density + ' people / mi<sup>2</sup>'
-          : 'Hover over a state');
+      this._div.innerHTML = '<h4>Remain percentage </h4>' +  (props ?
+          '<b>' + props.NAME + '</b><br />' + props.RemainPercent_EU + '%'
+          : 'Hover over a Council area');
   };
 
   info.addTo(map);  
+  
+  var legend = L.control({position: 'bottomright'});
+  
+  legend.onAdd = function (map) {
+
+      var div = L.DomUtil.create('div', 'info legend'),
+          grades = [0, 50, 55, 60, 63, 66, 70, 72],
+          labels = [];
+
+      // loop through our density intervals and generate a label with a colored square for each interval
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+
+      return div;
+  };
+  
+  legend.addTo(map);
 
 });
