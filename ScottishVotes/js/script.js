@@ -1,3 +1,27 @@
+
+/* FUNCTIONS */
+function getColor(d) {
+    return d > 72 ? '#800026' :
+           d > 70  ? '#BD0026' :
+           d > 66  ? '#E31A1C' :
+           d > 63  ? '#FC4E2A' :
+           d > 60   ? '#FD8D3C' :
+           d > 55   ? '#FEB24C' :
+           d > 50   ? '#FED976' :
+                      '#FFEDA0';
+}
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.RemainPercent_EU),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
 /* DATA REQUESTS */
 var ScottishVotes = $.ajax({
   url: "https://raw.githubusercontent.com/PolyMapper/polymapper.github.io/master/ScottishVotes/raw/ScottishVotes.geojson",
@@ -26,14 +50,8 @@ $.when(ScottishVotes).done(function() {
   
   // Add requested external GeoJSON to map
   var geoScottishVotes = L.geoJSON(ScottishVotes.responseJSON, {
-	fillOpacity: 0,
-	color: '#b2b2b2',
-	weight: 0.75
+	style: style
   }).addTo(map);
 
-  var kyMotorways = L.geoJSON(motorways.responseJSON, {
-	color: 'red',
-	weight: 1
-  }).addTo(map);
 
 });
