@@ -111,7 +111,7 @@ $.when(ScottishVotes).done(function() {
   
   legend.onAdd = function (map) {
 
-      var div = L.DomUtil.create('div', 'info legend'),
+      var div = L.DomUtil.create('div', 'info2 legend'),
           grades = [0, 50, 55, 60, 63, 66, 70, 72],
           labels = [];
 
