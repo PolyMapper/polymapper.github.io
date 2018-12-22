@@ -14,7 +14,7 @@ function getColor(d) {
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.RemainPercent_EU),
-        weight: 2,
+        weight: 1,
         opacity: 1,
         color: 'white',
         dashArray: '3',
@@ -59,7 +59,7 @@ $.when(ScottishVotes).done(function() {
 	  var layer = e.target;
 
       layer.setStyle({
-          weight: 5,
+          weight: 2,
           color: '#666',
           dashArray: '',
           fillOpacity: 0.7
