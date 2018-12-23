@@ -95,7 +95,7 @@ Gallery
 #gallery .btn {
   border: none;
   font-size: inherit;
-  font-weight: 50;
+  font-weight: 100;
   color: #f9e559;
   display: inline-block;
   text-transform: uppercase;
@@ -104,6 +104,9 @@ Gallery
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
+}
+#gallery .btn:hover {
+  cursor: pointer;
 }
 #gallery .btn:before {
   content: '';
@@ -170,6 +173,8 @@ Gallery
     margin: 3%;
   }
 }
+
+
 /* ====================================
 Navigation 
 ==================================== */
