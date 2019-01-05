@@ -26,7 +26,7 @@ function style(feature) {
 
 /* DATA REQUESTS */
 var ScottishVotes = $.ajax({
-  url: "https://raw.githubusercontent.com/PolyMapper/polymapper.github.io/master/ScottishVotes/raw/ScottishVotes.geojson",
+  url: "https://github.com/PolyMapper/polymapper.github.io/tree/master/portfolio/ScottishVotes/raw/ScottishVotes.geojson",
   dataType: "json",
   success: console.log("County data successfully loaded."),
   error: function(xhr) {
