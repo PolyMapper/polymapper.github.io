@@ -23,7 +23,13 @@
 			<div class="btn_container">
 			  <a class="open_button" href="#">Info</a>
 			</div>
-			
+			<div class="custom-select">
+				<select name="Layerchoice" id="select1" onchange="dropdown_onchange(this)">
+					<option value="dummy" disabled  selected>Please select</option>
+					<option value="testlayer1">Testlayer1</option>
+					<option value="testlayer2">Testlayer2</option>
+				</select>
+			</div>
 			<div id="map"></div>
 			
 			<div class="modal_info">

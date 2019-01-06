@@ -20,6 +20,14 @@ body {
   */
 }
 
+/* -- Selection -- */
+
+.custom-select {
+	position: absolute;
+	right: 17px;
+	top: 150px;
+	z-index: 1;
+}
 
 /* -- Map -- */
 

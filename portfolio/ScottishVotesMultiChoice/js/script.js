@@ -21,12 +21,26 @@ function style(feature) {
         fillOpacity: 0.7
     };
 }
+/* SELECTION */
+var dropdownlayers = {};
+function dropdown_onchange(choice) {
+	console.log(choice.value);
+	load_layer(dropdownlayers[choice.value]);
+
+}
+function clean_map() {
+    console.log("clean up");
+}
+function load_layer(dropdownchoice) {
+	clean_map();
+	console.log("Putting on map");
+}
 
 
 
 /* DATA REQUESTS */
 var ScottishVotes = $.ajax({
-  url: "/raw/ScottishVotes.geojson",
+  url: "https://raw.githubusercontent.com/PolyMapper/polymapper.github.io/master/raw/ScottishVotes.geojson",
   dataType: "json",
   success: console.log("County data successfully loaded."),
   error: function(xhr) {
@@ -39,20 +53,34 @@ var ScottishVotes = $.ajax({
 // inside here is basically normal javascript
 // disabiling the zoom controls
 $.when(ScottishVotes).done(function() {
-  //var map = L.map("map").setView([56.781854, -4.577107], 7);
-  var map = L.map("map", {
-	zoomControl: false
-  }).setView([56.781854, -4.577107], 7);
-  
-  var basemap = L.tileLayer(
-	"https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png",
-	{
-	  attribution:
-		'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-	  subdomains: "abcd",
-	  maxZoom: 19
-	}
-  ).addTo(map);
+	// Setting the variables to the map and attriute info (copywrite)
+	var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+	
+	// setting the map link
+	var	mbUrl = 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+	
+	// setting options for base map
+	var grayscale   = L.tileLayer(mbUrl, {id: 'mapbox.light', attribution: mbAttr});
+	var streets  = L.tileLayer(mbUrl, {id: 'mapbox.streets',   attribution: mbAttr});
+	
+	// initial map (greyscale as default)
+	var map = L.map('map', {
+		zoomControl: false,
+		center: [56.781854, -4.577107],
+		zoom: 7,
+		layers: [grayscale]
+	});
+
+	// creating a lookup for the base map names
+	var baseLayers = {
+		"Grayscale": grayscale//,
+		//"Streets": streets
+	};
+	
+	// add the base layers to the map
+	L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
   
 	//add zoom control with your options
 	L.control.zoom({
@@ -135,6 +163,8 @@ $.when(ScottishVotes).done(function() {
   };
   
   legend.addTo(map);
+  
+  //Selection
 
 });
 
