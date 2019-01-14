@@ -24,20 +24,40 @@ style: new ol.style.Style({
 })
 });
 
-var countries = new ol.layer.Vector({
-	source: new ol.source.Vector({
-	  url: 'https://openlayers.org/en/v5.1.3/examples/data/geojson/countries.geojson',
+getStyle = function (feature, resolution) {
+    if (feature.get('RemainPercent_EU') < 70) {
+        return new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [255, 0, 0, 0.5] // semi-transparent red
+            })
+        });
+    }
+    // else if ...
+    else {
+        return new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [255, 255, 0, 0.5] // semi-transparent yellow
+            })
+        });
+    }
+};
+
+my_layer = new ol.layer.Vector({
+    source: new ol.source.Vector({
+	  url: 'https://raw.githubusercontent.com/PolyMapper/polymapper.github.io/master/raw/ScottishVotes.geojson',
 	  format: new ol.format.GeoJSON()
-	})
+	}),
+    style: function (feature, resolution) {
+        return getStyle(feature, resolution);
+    }
 });
-//map.addLayer(countries);
 
 var map = new ol.Map({
-layers: [raster, vector, countries],
+layers: [raster, vector, my_layer],
 target: 'map',
 view: new ol.View({
-	  center: [0, 0],
-	  zoom: 2
+	  center: ol.proj.transform([-4.577107,56.781854], 'EPSG:4326', 'EPSG:3857'),
+	  zoom: 6
 })
 });
 
@@ -58,6 +78,9 @@ snap = new ol.interaction.Snap({source: source});
 map.addInteraction(snap);
 
 }
+
+
+
 
 /**
 * Handle change event.
