@@ -1,55 +1,59 @@
 <!DOCTYPE html>
 <html lang="en" >
 
-	<head>
-		<meta charset="UTF-8">
-		<title>Polymapper Mapping Experiments - Portfolio</title>
-	 
-		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
-		<link rel="stylesheet" href="css/style.css">
+<head>
 
-	</head>
+    <meta charset=utf-8 />
+    <title>Seismic hazards in the continental U.S.</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel='stylesheet' href='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css' />
+    <script src='http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js'></script>
+    <script src='js/seismic_risk.js'></script>
+	<script src='js/earthq.js'></script>
+	<script src='js/leaflet.ajax.min.js'></script>
+	<script src='js/date.format.js'></script>
 
-	<body>
+    <style>
+        body {margin:0; padding:0;}
+        #map {position:absolute; top:0; bottom:0; width:100%;}
+        #legend {
+            background: #ffffff;
+            position: absolute;
+            bottom: 30px;
+            left: 10px;
+            padding: 0px 10px;
+            width: 200px;
+            font-family: arial;
+            font-size: small;
+            -webkit-border-radius:4px 4px 4px 4px;
+            border-radius:4px 4px 4px 4px;
+            -webkit-box-shadow: 0px 1px 5px rgba(153,153,153,1);
+            -moz-box-shadow: 0px 1px 5px rgba(153,153,153,1);
+            box-shadow: 0px 1px 5px rgba(153,153,153,1);
+        }
+    </style>
 
-		<input type="checkbox" id="menu-toggle" />
-		<label for="menu-toggle" class="menu-icon"><i class="fa fa-bars"></i></label>
-		<div class="content-container">
-			<div class="site-title">
-				<h1>Portfolio</h1>
-			</div>
-			<div class="content">
-			
-				<div class="portfolio-thumb">
-					<a href="/portfolio/ScottishVotes">
-					<img src="images/portfolio-img1.jpg" class="img" alt="Portfolio">
-					<div class="middle">
-						<div class="img-text">Test 1</div>
-					</div>
-				</div>
+</head>>
 
-				<div class="portfolio-thumb">
-					<a href="#">
-					<img src="images/portfolio-img1.jpg" class="img" alt="Portfolio">
-					<div class="middle">
-						<div class="img-text">Test 2</div>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		
-		<div class="slideout-sidebar">
-			<ul>
-				<li><a href="/index.html">Home</a></li>
-				<li><a href="/portfolio">Portfolio</a></li>
-				<li><a href="/blog">Blog</a></li>
-				<li><a href="/cv">CV</a></li>
-			</ul>
-		</div>
+<body>
 
-		<script  src="js/index.js"></script>
+    <div id='map'>
 
-	</body>
+        <script src='js/maps.js'></script>
+
+    </div>
+
+    <div id='legend'>
+        <p><strong>Seismic risk:</strong></p>
+        <p>Low
+        <span style='color:#fee5d9'>▉</span>
+        <span style='color:#fcae91'>▉</span>
+        <span style='color:#fb6a4A'>▉</span>
+        <span style='color:#de2d26'>▉</span>
+        <span style='color:#a50f15'>▉</span>
+        High</p>
+    </div>
+
+</body>
 
 </html>
