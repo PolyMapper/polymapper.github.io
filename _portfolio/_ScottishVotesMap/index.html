@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>Polymapper Mapping Experiments - Scottish Referendum</title>
+		
+		<!-- CSS FOR FONTS -->
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+		<!-- CSS FOR PAGE STYLE -->
+		<link rel="stylesheet" href="css/style.css">
+		<!-- CSS FOR THE MAP -->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+
+</head>
+
+<body>
+		<input type="checkbox" id="menu-toggle" />
+		<label for="menu-toggle" class="menu-icon"><i class="fa fa-bars"></i></label>
+		<div class="content-container">
+			
+			<div class="btn_container">
+			  <a class="open_button" href="#">Info</a>
+			</div>
+			
+			<div id="map"></div>
+			
+			<div class="modal_info">
+			  <h1>Scottish Independence</h1>
+			  <p>A simple chlorpleth map that indicates the percentage of remain votes.</p>
+			  <p>This map uses Leaflet and Ajax.</p>
+			
+			</div>
+			<div class="modal_overlay"></div>
+			
+		</div>
+		
+		<div class="slideout-sidebar">
+			<ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="#about">About</a></li>
+			<li><a href="/_portfolio">Portfolio</a></li>
+            <li><a href="#CV">CV</a></li>
+			</ul>
+		</div>	
+		
+	<!-- JAVASCRIPT  FOR AJAX (FOR GEOJSON) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- JAVASCRIPT  FOR LEAFLET -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>    
+	<!-- MAP SCRIPT -->
+	<script type="text/javascript" src="js/script.js"></script>
+	
+</body>
+
+</html>
