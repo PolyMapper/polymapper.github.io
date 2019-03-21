@@ -66,11 +66,11 @@ $(document).ready(function(){
                     $('#txtFindPub').val(ui.item.label);
                     var val = $("#txtFindPub").val();
                     testLayerAttribute(arPubNames, val, "Pub Name", "#divFindPub", "#divPubError", "#btnFindPub")
-                    console.log("True");
+                    console.log("True1");
                 }
                 
                 return false;
-                console.log("False");
+                console.log("False1");
             }
         });
         lyrMarkerCluster.addLayer(lyrPubs);
