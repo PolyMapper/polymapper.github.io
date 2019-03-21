@@ -51,14 +51,13 @@ $(document).ready(function(){
     
     /*icnBeer = L.icon({iconUrl:'img/Beer.png', iconSize:[40,40], iconAnchor:[20,24]});*/
     
-    lyrMarkerCluster = L.markerClusterGroup();
-    lyrPubs = L.geoJSON.ajax('data/EdinburghPubs.geojson', {pointToLayer:returnPubMarker, onEachFeature:processPub})/*.addTo(mymap)*/;
     
+    lyrMarkerCluster = L.markerClusterGroup();
+    lyrPubs = L.geoJSON.ajax('data/EdinburghPubs.geojson', {pointToLayer:returnPubMarker, onEachFeature:processPub});
     lyrPubs.on('data:loaded', function(){
         arPubNames.sort();
         /*console.log(arPubNames)*/
-        console.log("In Data Loaded")
-        
+        console.log("In Data Loaded");
         $("#txtFindPub").autocomplete({
             source:arPubNames,
             // on select of automcomplete complete the function
@@ -68,16 +67,15 @@ $(document).ready(function(){
                     $('#txtFindPub').val(ui.item.label);
                     var val = $("#txtFindPub").val();
                     testLayerAttribute(arPubNames, val, "Pub Name", "#divFindPub", "#divPubError", "#btnFindPub")
-                    console.log("True1");
                 }
                 
                 return false;
-                console.log("False1");
             }
         });
+        console.log("Finished Auto Complete")
         lyrMarkerCluster.addLayer(lyrPubs);
         lyrMarkerCluster.addTo(mymap);
-    });    
+    });
     
 
 
@@ -125,7 +123,6 @@ function processPub(json, lyr){
 
 $("#txtFindPub").on('keyup paste', function(){
     console.log('textbox has been pinged');
-    lyrPubs.refresh()
     var val = $("#txtFindPub").val();
     testLayerAttribute(arPubNames, val, "Pub Name", "#divFindPub", "#divPubError", "#btnFindPub");
 });
