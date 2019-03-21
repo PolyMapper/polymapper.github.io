@@ -125,6 +125,7 @@ function processPub(json, lyr){
 
 $("#txtFindPub").on('keyup paste', function(){
     console.log('textbox has been pinged');
+    lyrPubs.refresh()
     var val = $("#txtFindPub").val();
     testLayerAttribute(arPubNames, val, "Pub Name", "#divFindPub", "#divPubError", "#btnFindPub");
 });
