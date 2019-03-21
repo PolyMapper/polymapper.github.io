@@ -5,7 +5,7 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   padding: 10px;
-  z-index: 2000; }
+  z-index: 2006; }
   .leaflet-sidebar.left {
     left: -500px;
     transition: left 0.5s, width 0.5s;
@@ -93,7 +93,7 @@
     -webkit-border-radius: 16px;
     border-radius: 16px;
     cursor: pointer;
-    z-index: 8; }
+    z-index: 2050; }
 
 .leaflet-left {
   transition: left 0.5s; }

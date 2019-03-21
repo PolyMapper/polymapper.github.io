@@ -5,6 +5,7 @@ var lyrSearch;
 var lyrMarkerCluster;
 var mrkCurrentLocation;
 var popZocalo;
+var fgpDrawnItems;
 var ctlAttribute;
 var ctlScale;
 var ctlZoom;
@@ -12,6 +13,8 @@ var ctlMouseposition;
 var ctlEasybutton;
 var ctlSidebar;
 var ctlLayers;
+var ctlDraw;
+var ctlStyle;
 var objBasemaps;
 var objOverlays;
 var icnBeer;
@@ -92,13 +95,42 @@ $(document).ready(function(){
     };
     
     objOverlays = {
-        "Pubs":lyrPubs
+        "Pubs":lyrPubs,
+        "Drawn Items":fgpDrawnItems
     };
     
     ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
     
+    // **********  Setup Draw Control ****************
+
+    ctlDraw = new L.Control.Draw({
+        draw:{
+            polyline:false,
+            polygon:false,
+            circle:false,
+            rectangle:false,
+        },
+        edit:{
+            featureGroup:fgpDrawnItems,
+            remove:false
+        }
+    });
+    ctlDraw.addTo(mymap);
+
+    mymap.on('draw:created', function(e){
+        var llRef = e.layer.getLatLng();
+        var strTable = "<table class='table table-hover'>";
+        strTable += "<tr><th>Type</th><th>Name</th><th>Distance</th><th>Direction</th></tr>";
+        var nrPub= returnClosestlayer(lyrPubs, llRef);
+        strTable += "<tr><td>Pub</td><td>"+nrPub.att.name+"</td><td>"+nrPub.distance.toFixed(0)+" m</td><td>"+nrPub.bearing.toFixed(0)+"</td></tr>";
+        strTable += "</table>";
+        fgpDrawnItems.addLayer(e.layer.bindPopup(strTable, {maxWidth:400}));
+    });
     
 });
+
+
+
 
 // *********  Pub Functions *****************
 function returnPubMarker(json, latlng){
@@ -202,3 +234,39 @@ function testLayerAttribute(ar, val, att, fg, err, btn) {
         $(btn).attr("disabled", false);
     }
 }
+
+/*calculating distance*/
+
+function returnLength(arLL) {
+    var total=0;
+
+    for (var i=1;i<arLL.length;i++) {
+        total = total + arLL[i-1].distanceTo(arLL[i]);
+    }
+
+    return total;
+
+}
+
+function returnMultiLength(arArLL) {
+    var total=0;
+
+    for (var i=0; i<arArLL.length;i++) {
+        total = total + returnLength(arArLL[i]);
+    }
+
+    return total;
+}
+
+function returnClosestlayer(lyrGroup, llRef) {
+    var arLyrs = lyrGroup.getLayers();
+    var nearest = L.GeometryUtil.closestLayer(mymap, arLyrs, llRef);
+    nearest.distance = llRef.distanceTo(nearest.latlng);
+    nearest.bearing = L.GeometryUtil.bearing(llRef, nearest.latlng);
+    if (nearest.bearing<0){
+        nearest.bearing = nearest.bearing+360;
+    }
+    nearest.att = nearest.layer.feature.properties;
+    return nearest;
+}
+
