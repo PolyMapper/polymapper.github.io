@@ -56,7 +56,9 @@ $(document).ready(function(){
     
     lyrPubs.on('data:loaded', function(){
         arPubNames.sort();
-        console.log(arPubNames)
+        /*console.log(arPubNames)*/
+        console.log("In Data Loaded")
+        
         $("#txtFindPub").autocomplete({
             source:arPubNames,
             // on select of automcomplete complete the function
