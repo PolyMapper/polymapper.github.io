@@ -26,7 +26,7 @@ function style(feature) {
 
 /* DATA REQUESTS */
 var ScottishVotes = $.ajax({
-  url: "/raw/ScottishVotes.geojson",
+  url: "/ScottishVotesMap/raw/ScottishVotes.geojson",
   dataType: "json",
   success: console.log("County data successfully loaded."),
   error: function(xhr) {
