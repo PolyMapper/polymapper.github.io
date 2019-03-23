@@ -3,6 +3,7 @@ var lyrOSM;
 var lyrPubs;
 var lyrSearch;
 var lyrMarkerCluster;
+var lyrPubHeat
 var mrkCurrentLocation;
 var popZocalo;
 var fgpDrawnItems;
@@ -19,6 +20,8 @@ var objBasemaps;
 var objOverlays;
 var icnBeer;
 var arPubNames = [];
+var arPubll = [];
+var arTestPubll = [];
 
 $(document).ready(function(){
     
@@ -57,6 +60,9 @@ $(document).ready(function(){
     
     lyrMarkerCluster = L.markerClusterGroup();
     lyrPubs = L.geoJSON.ajax('data/EdinburghPubs.geojson', {pointToLayer:returnPubMarker, onEachFeature:processPub});
+    
+    
+    
     lyrPubs.on('data:loaded', function(){
         arPubNames.sort();
         /*console.log(arPubNames)*/
@@ -78,12 +84,15 @@ $(document).ready(function(){
         console.log("Finished Auto Complete")
         lyrMarkerCluster.addLayer(lyrPubs);
         lyrMarkerCluster.addTo(mymap);
+        lyrPubHeat.redraw();
+        
     });
     
+    /*this will do nothing immediately (need the redraw in the data:loaded)*/
+    lyrPubHeat = L.heatLayer(arPubll).addTo(mymap);
 
-
-    /*console.log(arPubNames)*/;
     
+
     // ********* Setup Layer Control  ***************
 
     objBasemaps = {
@@ -95,7 +104,8 @@ $(document).ready(function(){
     };
     
     objOverlays = {
-        "Pubs":lyrPubs,
+        "Pubs":lyrMarkerCluster,
+        "Pub Heat Map":lyrPubHeat,
         "Drawn Items":fgpDrawnItems
     };
     
@@ -149,12 +159,23 @@ function processPub(json, lyr){
     lyr.bindTooltip("<h4>Pub Name: "+att.name+"</h4>");
     /*lyr.bindPopup("<h4>Pub Name: "+att.name+"</h4>");*/
     arPubNames.push(att.name.toString());
+    
+    /*heat map - need to get an array of lat lngs*/
+    
+   /*create an array of x and y*/
+   /*the 3 is there to increase intensity, would work without it*/
+    var lt = lyr.getLatLng().lat;
+    var ln = lyr.getLatLng().lng;
+    arPubll.push([lt,ln,3]);
+    
+
+   
 }
 
     
 
 $("#txtFindPub").on('keyup paste', function(){
-    console.log('textbox has been pinged');
+
     var val = $("#txtFindPub").val();
     testLayerAttribute(arPubNames, val, "Pub Name", "#divFindPub", "#divPubError", "#btnFindPub");
 });
@@ -190,20 +211,16 @@ $("#btnFindPub").click(function(){
         lyrSearch.openPopup()
         
         // zoom to
-        /*mymap.fitBounds(lyr.getBounds().pad(1));*/
         mymap.flyTo(lyr.getLatLng(), 19)
-        /*var att = lyr.feature.properties;*/
         
         // update details in textbox
         $("#divPubData").html("<h4 class='text-center'>Pub Details</h4><h5>name: "+att.name+"</h5>");
-        
         
         $("#divPubError").html("");
     
     } else {
         $("#divPubError").html("**** Pub not found ****");
     }
-    console.log('Button has been clicked');
 });
 
 //  ***********  General Functions *********
