@@ -26,7 +26,7 @@ $(document).ready(function(){
 
     mymap = L.map('mapdiv', {center:[55.94036, -3.19084], zoom:12, attributionControl:false});
 
-    ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+    ctlSidebar = L.control.sidebar('side-bar',{closebutton: 'true'}).addTo(mymap);
 
     ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
        ctlSidebar.toggle(); 
