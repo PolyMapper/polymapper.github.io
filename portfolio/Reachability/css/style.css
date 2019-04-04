@@ -1,0 +1,19 @@
+html, body
+{
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
+.mapFullScreen
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+/* Make the icons larger in the user interface */
+.reachability-control-settings-button
+{
+	font-size: 22px;
+}
