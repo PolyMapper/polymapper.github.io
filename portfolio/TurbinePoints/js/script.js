@@ -1,13 +1,5 @@
 var mymap;
 var lyrOSM;
-var lyrPubs;
-var lyrSearch;
-var lyrMarkerCluster;
-var lyrPubHeat
-var mrkCurrentLocation;
-var popZocalo;
-var fgpDrawnItems;
-var fgpDrawnItemsBuff;
 var ctlAttribute;
 var ctlScale;
 var ctlZoom;
@@ -23,7 +15,7 @@ var icnBeer;
 var arPubNames = [];
 var arPubll = [];
 var arTestPubll = [];
-var pntBuff;
+var impactPntBuff;
 
 var pointTestGroup;
 var pointTestCombined;
@@ -35,7 +27,15 @@ var pointTest1;
 var pointTest2;
 /*var pointTest3;*/
 var pntsAR = [];
-var multiBufferPoints;
+var multiBufferPoly;
+
+var fgpPointLoc;
+var fgpStudyPointBuff;
+var fgpImpactPointBuff;
+
+
+
+
 
 $(document).ready(function(){
     
@@ -68,12 +68,22 @@ $(document).ready(function(){
     lyrWatercolor = L.tileLayer.provider('Stamen.Watercolor');
     mymap.addLayer(lyrOSM);
 
-    fgpDrawnItems = new L.FeatureGroup();
-    fgpDrawnItems.addTo(mymap);
+    fgpPointLoc = new L.FeatureGroup();
+    fgpPointLoc.addTo(mymap);
     
-    fgpDrawnItemsBuff = new L.FeatureGroup();
-    fgpDrawnItemsBuff.addTo(mymap);
-    
+    fgpStudyPointBuff = new L.FeatureGroup();
+    fgpStudyPointBuff.addTo(mymap);
+	
+	fgpImpactPointBuff = new L.FeatureGroup();
+    fgpImpactPointBuff.addTo(mymap);
+	
+	lyrSPA = L.geoJSON.ajax('data/EdinburghSPA_WGS84.geojson',{style:{color:'yellow', dashArray:'5,5', fillOpacity:0},onEachFeature:processSPA}).addTo(mymap);
+	console.log(lyrSPA);
+	
+	
+	/*lyrSPA.bindPopup("SPA");*/
+	lyrSPA.bringToFront();
+	
 
     // ********* Setup Layer Control  ***************
 
@@ -86,8 +96,9 @@ $(document).ready(function(){
     };
     
     objOverlays = {
-        "Drawn Items":fgpDrawnItems,
-        "Buffers":fgpDrawnItemsBuff
+        "Turbine Points":fgpPointLoc,
+        "Buffers":fgpStudyPointBuff,
+		"Impacted Area": fgpImpactPointBuff
     };
     
     ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
@@ -102,7 +113,7 @@ $(document).ready(function(){
             rectangle:false,
         },
         edit:{
-            featureGroup:fgpDrawnItems,
+            featureGroup:fgpPointLoc,
             remove:false
         }
     });
@@ -111,35 +122,73 @@ $(document).ready(function(){
     mymap.on('draw:created', function(e){
         
      
-        if (mymap.hasLayer(multiBufferPoints)) {
-            mymap.removeLayer(multiBufferPoints);
-            console.log("Layer here");
+        if (mymap.hasLayer(fgpStudyPointBuff)) {
+			fgpStudyPointBuff.clearLayers();
+
         }
 		
-            
-        fgpDrawnItems.addLayer(e.layer);
+		/*call a function that collects the highest array value*/
+		/*the high array value for the single points and buffers*/
+        
+		/*add the point to the group to allow for turning off and on*/
+        fgpPointLoc.addLayer(e.layer);
 		
-        var lt = e.layer.getLatLng().lat;
-        var ln = e.layer.getLatLng().lng;
-        arPubll.push([ln,lt]);   
-        /*console.log(arPubll);*/
+		/*get the lat and lon of the point*/
+		getLatLn(e);   
         
-        var pointTest3 = turf.multiPoint(arPubll);
-        var pointTest31 = turf.multiPoint([[-3.212549, 55.946015],[-3.195523, 55.940343]]);
-        console.log(pointTest3);
-        console.log(pointTest31);
+		/*create a multipoint feature from the lat ln array*/
+        var pointLocGroup = turf.multiPoint(arPubll);
         
-        var bufferedTest3 = turf.buffer(pointTest3, 3, 'kilometers')
-        
-        multiBufferPoints = L.geoJSON(bufferedTest3, {style:{color:'red', dashArray:'5,5', fillOpacity:0}}).addTo(mymap);
+		/*create buffer from the multipoint*/
+		/*This allows the buffer to be dissolved*/
+        var pointLocGroupBuf = turf.buffer(pointLocGroup, 3, 'kilometers')
+		
+		/*calculate area*/
+        var area = calcArea(pointLocGroupBuf);
+		
+		/*intersect*/
+		var intStudyArea = intersectPolyByPolyFC(pointLocGroupBuf, lyrSPA.toGeoJSON());
+		
+		L.geoJSON(intStudyArea, {style:{color:'red', weight:5}}).addTo(mymap);
+		
+		/*style the dissolved buffer*/
+        pointLocGroupBuf = L.geoJSON(pointLocGroupBuf, {style:{color:'red', dashArray:'5,5', fillOpacity:0}})
+		
+		/*determine tooltip*/
+		console.log(intStudyArea.features.length);
+		
+		if (intStudyArea.features.length > 0) {
+			var ttSPA = "<h4> Study Area</h4> <br> AREA: "+area+"km sq <br> INTERSECTS: SPA"
+		}
+		else{
+			var ttSPA = "<h4> Study Area</h4> <br> AREA: "+area+"km sq"
+		}
+		
+		pointLocGroupBuf.bindTooltip(ttSPA).addTo(mymap);
+		
+		/*add to map*/
+		fgpStudyPointBuff.addLayer(pointLocGroupBuf);
+		fgpStudyPointBuff.bringToFront();
+		
+		
+		
+		/*create a buffer around the point but not dissolved*/
+        impactPntBuff = turf.buffer(e.layer.toGeoJSON(), 0.7, 'kilometers');
+		
+		var impactArea = calcArea(impactPntBuff);
+		
+        impactPntBuff = L.geoJSON(impactPntBuff, {style:{color:'blue', dashArray:'5,5', fillOpacity:0}});
+		
+		impactPntBuff.bindTooltip("<h4>Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq").addTo(mymap);
+		
+		fgpImpactPointBuff.addLayer(impactPntBuff);
+		
+        fgpImpactPointBuff.bringToFront();
 
-        pntBuff = turf.buffer(e.layer.toGeoJSON(), 0.7, 'kilometers');
-        pntBuff = L.geoJSON(pntBuff, {style:{color:'blue', dashArray:'5,5', fillOpacity:0}}).addTo(mymap);
-        
-        /*fgpDrawnItemsBuff.addLayer(multiBufferPoints);*/
-		fgpDrawnItemsBuff.addLayer(pntBuff);
-        fgpDrawnItemsBuff.bringToFront();
-        fgpDrawnItems.bringToFront();
+		
+		
+
+	
         
     });
     
@@ -158,11 +207,39 @@ function processPoint(json, lyr){
     var lt = lyr.getLatLng().lat;
     var ln = lyr.getLatLng().lng;
     arPubll.push([lt,ln,3]);
-    
-
-   
+     
 }
 
+function getLatLn(e) {
+	var lt = e.layer.getLatLng().lat;
+	var ln = e.layer.getLatLng().lng;
+	arPubll.push([ln,lt]);
+}
 
+function calcArea(poly) {
+	return (turf.area(poly)/1000000).toFixed(2);
+}
+
+function processSPA(json, lyr){
+	var att = json.properties;
+	lyr.bindTooltip("<h4>Name: "+att.NAME);
+}
 //  ***********  General Functions *********
 
+function intersectPolyByPolyFC(poly, fcPoly) {
+	console.log("Here 1");
+	var fgp = [];
+	var bbPoly = turf.bboxPolygon(turf.bbox(poly));
+	for (var i=0;i<fcPoly.features.length;i++) {
+		var bb = turf.bboxPolygon(turf.bbox(fcPoly.features[i]));
+		if (turf.intersect(bbPoly, bb)) {
+			console.log("Im here")
+			var int = turf.intersect(poly, fcPoly.features[i]);
+			if (int) {
+				int.properties = fcPoly.features[i].properties;
+				fgp.push(int);
+			}
+		}
+	}
+	return turf.featureCollection(fgp);
+}

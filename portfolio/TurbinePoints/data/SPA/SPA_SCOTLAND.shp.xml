@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MD_Metadata xmlns="http://www.isotc211.org/2005/gmd"
+             xmlns:gco="http://www.isotc211.org/2005/gco"
+             xmlns:gts="http://www.isotc211.org/2005/gts"
+             xmlns:srv="http://www.isotc211.org/2005/srv"
+             xmlns:gml="http://www.opengis.net/gml"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+   <language>
+      <LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php"
+                    codeListValue="eng"
+                    codeSpace="ISO639-2">eng</LanguageCode>
+   </language>
+   <characterSet>
+      <MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
+                           codeListValue="utf8"
+                           codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+   </characterSet>
+   <hierarchyLevel>
+      <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+                    codeListValue="dataset"
+                    codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+   </hierarchyLevel>
+   <hierarchyLevelName>
+      <gco:CharacterString>dataset</gco:CharacterString>
+   </hierarchyLevelName>
+   <contact>
+      <CI_ResponsibleParty>
+         <individualName>
+            <gco:CharacterString>Geographic Information Group</gco:CharacterString>
+         </individualName>
+         <organisationName>
+            <gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+         </organisationName>
+         <positionName>
+            <gco:CharacterString>Geographic Systems and Data Officer</gco:CharacterString>
+         </positionName>
+         <contactInfo>
+            <CI_Contact>
+               <phone>
+                  <CI_Telephone>
+                     <voice>
+                        <gco:CharacterString>01463725117</gco:CharacterString>
+                     </voice>
+                  </CI_Telephone>
+               </phone>
+               <address>
+                  <CI_Address>
+                     <deliveryPoint>
+                        <gco:CharacterString>Great Glen House, Leachkin Road</gco:CharacterString>
+                     </deliveryPoint>
+                     <city>
+                        <gco:CharacterString>Inverness</gco:CharacterString>
+                     </city>
+                     <postalCode>
+                        <gco:CharacterString>IV3 8NW</gco:CharacterString>
+                     </postalCode>
+                     <country>
+                        <Country codeList="http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm"
+                                 codeListValue="GB"
+                                 codeSpace="ISO3166-1">GB</Country>
+                     </country>
+                     <electronicMailAddress>
+                        <gco:CharacterString>data_supply@nature.scot</gco:CharacterString>
+                     </electronicMailAddress>
+                  </CI_Address>
+               </address>
+            </CI_Contact>
+         </contactInfo>
+         <role>
+            <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                         codeListValue="custodian"
+                         codeSpace="ISOTC211/19115">custodian</CI_RoleCode>
+         </role>
+      </CI_ResponsibleParty>
+   </contact>
+   <dateStamp>
+      <gco:Date>2019-02-11</gco:Date>
+   </dateStamp>
+   <metadataStandardName>
+      <gco:CharacterString>ISO 19139 Geographic Information - Metadata - Implementation Specification</gco:CharacterString>
+   </metadataStandardName>
+   <metadataStandardVersion>
+      <gco:CharacterString>2007</gco:CharacterString>
+   </metadataStandardVersion>
+   <spatialRepresentationInfo>
+      <MD_VectorSpatialRepresentation>
+         <topologyLevel>
+            <MD_TopologyLevelCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_TopologyLevelCode"
+                                  codeListValue="geometryOnly"
+                                  codeSpace="ISOTC211/19115">geometryOnly</MD_TopologyLevelCode>
+         </topologyLevel>
+         <geometricObjects>
+            <MD_GeometricObjects>
+               <geometricObjectType>
+                  <MD_GeometricObjectTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_GeometricObjectTypeCode"
+                                              codeListValue="composite"
+                                              codeSpace="ISOTC211/19115">composite</MD_GeometricObjectTypeCode>
+               </geometricObjectType>
+               <geometricObjectCount>
+                  <gco:Integer>2475</gco:Integer>
+               </geometricObjectCount>
+            </MD_GeometricObjects>
+         </geometricObjects>
+      </MD_VectorSpatialRepresentation>
+   </spatialRepresentationInfo>
+   <referenceSystemInfo>
+      <MD_ReferenceSystem>
+         <referenceSystemIdentifier>
+            <RS_Identifier>
+               <code>
+                  <gco:CharacterString>27700</gco:CharacterString>
+               </code>
+               <codeSpace>
+                  <gco:CharacterString>EPSG</gco:CharacterString>
+               </codeSpace>
+               <version>
+                  <gco:CharacterString>8.6.2</gco:CharacterString>
+               </version>
+            </RS_Identifier>
+         </referenceSystemIdentifier>
+      </MD_ReferenceSystem>
+   </referenceSystemInfo>
+   <identificationInfo>
+      <MD_DataIdentification>
+         <citation>
+            <CI_Citation>
+               <title>
+                  <gco:CharacterString>Special Protection Area (Scotland)</gco:CharacterString>
+               </title>
+               <alternateTitle>
+                  <gco:CharacterString>Dataset name: GIS_SNH_OWNER.SPA</gco:CharacterString>
+               </alternateTitle>
+               <date>
+                  <CI_Date>
+                     <date>
+                        <gco:Date>1997-01-01</gco:Date>
+                     </date>
+                     <dateType>
+                        <CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                         codeListValue="creation"
+                                         codeSpace="ISOTC211/19115">creation</CI_DateTypeCode>
+                     </dateType>
+                  </CI_Date>
+               </date>
+               <date>
+                  <CI_Date>
+                     <date>
+                        <gco:Date>2019-02-11</gco:Date>
+                     </date>
+                     <dateType>
+                        <CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
+                                         codeListValue="revision"
+                                         codeSpace="ISOTC211/19115">revision</CI_DateTypeCode>
+                     </dateType>
+                  </CI_Date>
+               </date>
+               <citedResponsibleParty>
+                  <CI_ResponsibleParty>
+                     <individualName>
+                        <gco:CharacterString>Geographic Information Group</gco:CharacterString>
+                     </individualName>
+                     <organisationName>
+                        <gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+                     </organisationName>
+                     <positionName>
+                        <gco:CharacterString>Data Supply</gco:CharacterString>
+                     </positionName>
+                     <contactInfo>
+                        <CI_Contact>
+                           <phone>
+                              <CI_Telephone>
+                                 <voice>
+                                    <gco:CharacterString>01463725000</gco:CharacterString>
+                                 </voice>
+                              </CI_Telephone>
+                           </phone>
+                           <address>
+                              <CI_Address>
+                                 <deliveryPoint>
+                                    <gco:CharacterString>Great Glen House, Leachkin Road</gco:CharacterString>
+                                 </deliveryPoint>
+                                 <city>
+                                    <gco:CharacterString>Inverness</gco:CharacterString>
+                                 </city>
+                                 <postalCode>
+                                    <gco:CharacterString>IV3 8NW</gco:CharacterString>
+                                 </postalCode>
+                                 <country>
+                                    <Country codeList="http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm"
+                                             codeListValue="GB"
+                                             codeSpace="ISO3166-1">GB</Country>
+                                 </country>
+                                 <electronicMailAddress>
+                                    <gco:CharacterString>data_supply@nature.scot</gco:CharacterString>
+                                 </electronicMailAddress>
+                              </CI_Address>
+                           </address>
+                        </CI_Contact>
+                     </contactInfo>
+                     <role>
+                        <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                     codeListValue="custodian"
+                                     codeSpace="ISOTC211/19115">custodian</CI_RoleCode>
+                     </role>
+                  </CI_ResponsibleParty>
+               </citedResponsibleParty>
+               <presentationForm>
+                  <CI_PresentationFormCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_PresentationFormCode"
+                                           codeListValue="mapDigital"
+                                           codeSpace="ISOTC211/19115">mapDigital</CI_PresentationFormCode>
+               </presentationForm>
+            </CI_Citation>
+         </citation>
+         <abstract>
+            <gco:CharacterString>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;SPAs in Scotland are classified by Scottish Ministers . These are areas of the most important habitat for rare (listed on Annex I to the Directive) and regularly occurring migratory birds within the European Union. SPAs are classified under the EC Birds Directive and together with SACs, form the Natura 2000 network. Proposed Special Protection Areas (pSPA) may be subject to change prior to classification.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</gco:CharacterString>
+         </abstract>
+         <credit>
+            <gco:CharacterString>© Scottish Natural Heritage, contains OS data © Crown copyright and database right (insert year)</gco:CharacterString>
+         </credit>
+         <resourceMaintenance>
+            <MD_MaintenanceInformation>
+               <maintenanceAndUpdateFrequency>
+                  <MD_MaintenanceFrequencyCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MaintenanceFrequencyCode"
+                                               codeListValue="continual"
+                                               codeSpace="ISOTC211/19115">continual</MD_MaintenanceFrequencyCode>
+               </maintenanceAndUpdateFrequency>
+            </MD_MaintenanceInformation>
+         </resourceMaintenance>
+         <descriptiveKeywords>
+            <MD_Keywords>
+               <keyword>
+                  <gco:CharacterString>GB-SCT</gco:CharacterString>
+               </keyword>
+               <type>
+                  <MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                      codeListValue="place"
+                                      codeSpace="ISOTC211/19115">place</MD_KeywordTypeCode>
+               </type>
+               <thesaurusName>
+                  <CI_Citation>
+                     <title>
+                        <gco:CharacterString>ISO 3166</gco:CharacterString>
+                     </title>
+                     <alternateTitle>
+                        <gco:CharacterString>Dataset name: GIS_SNH_OWNER.SPA</gco:CharacterString>
+                     </alternateTitle>
+                     <date gco:nilReason="missing"/>
+                  </CI_Citation>
+               </thesaurusName>
+            </MD_Keywords>
+         </descriptiveKeywords>
+         <descriptiveKeywords>
+            <MD_Keywords>
+               <keyword>
+                  <gco:CharacterString>Nature conservation</gco:CharacterString>
+               </keyword>
+               <type>
+                  <MD_KeywordTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_KeywordTypeCode"
+                                      codeListValue="theme"
+                                      codeSpace="ISOTC211/19115">theme</MD_KeywordTypeCode>
+               </type>
+               <thesaurusName>
+                  <CI_Citation>
+                     <title>
+                        <gco:CharacterString>Government Category List</gco:CharacterString>
+                     </title>
+                     <alternateTitle>
+                        <gco:CharacterString>Dataset name: GIS_SNH_OWNER.SPA</gco:CharacterString>
+                     </alternateTitle>
+                     <date gco:nilReason="missing"/>
+                  </CI_Citation>
+               </thesaurusName>
+            </MD_Keywords>
+         </descriptiveKeywords>
+         <descriptiveKeywords>
+            <MD_Keywords>
+               <keyword>
+                  <gco:CharacterString>Downloadable Data</gco:CharacterString>
+               </keyword>
+               <thesaurusName uuidref="723f6998-058e-11dc-8314-0800200c9a66"/>
+            </MD_Keywords>
+         </descriptiveKeywords>
+         <resourceConstraints>
+            <MD_Constraints>
+               <useLimitation>
+                  <gco:CharacterString>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN STYLE="font-size:10pt"&gt;Available under the &lt;/SPAN&gt;&lt;A href="http://www.nationalarchives.gov.uk/doc/open-government-licence/" STYLE="font-size:16pt"&gt;&lt;SPAN STYLE="font-size:10pt"&gt;Open Government Licence&lt;/SPAN&gt;&lt;/A&gt;&lt;SPAN STYLE="font-size:10pt"&gt;(http://www.nationalarchives.gov.uk/doc/open-government-licence/)&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</gco:CharacterString>
+               </useLimitation>
+            </MD_Constraints>
+         </resourceConstraints>
+         <resourceConstraints>
+            <MD_LegalConstraints>
+               <accessConstraints>
+                  <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                                      codeListValue="copyright"
+                                      codeSpace="ISOTC211/19115">copyright</MD_RestrictionCode>
+               </accessConstraints>
+               <accessConstraints>
+                  <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                                      codeListValue="otherRestrictions"
+                                      codeSpace="ISOTC211/19115">otherRestrictions</MD_RestrictionCode>
+               </accessConstraints>
+               <useConstraints>
+                  <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                                      codeListValue="copyright"
+                                      codeSpace="ISOTC211/19115">copyright</MD_RestrictionCode>
+               </useConstraints>
+               <useConstraints>
+                  <MD_RestrictionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode"
+                                      codeListValue="otherRestrictions"
+                                      codeSpace="ISOTC211/19115">otherRestrictions</MD_RestrictionCode>
+               </useConstraints>
+               <otherConstraints>
+                  <gco:CharacterString>Available under the Open Government Licence (http://www.nationalarchives.gov.uk/doc/open-government-licence/),  Note that this data is available to view or download on SNH website see: https://www.nature.scot/information-library-data-and-research/snhi-data-services</gco:CharacterString>
+               </otherConstraints>
+               <otherConstraints>
+                  <gco:CharacterString>You must always use the following attribution statement to acknowledge the source of the information:
+© Scottish Natural Heritage, contains OS data © Crown copyright and database right (insert year)</gco:CharacterString>
+               </otherConstraints>
+            </MD_LegalConstraints>
+         </resourceConstraints>
+         <spatialRepresentationType>
+            <MD_SpatialRepresentationTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_SpatialRepresentationTypeCode"
+                                              codeListValue="vector"
+                                              codeSpace="ISOTC211/19115">vector</MD_SpatialRepresentationTypeCode>
+         </spatialRepresentationType>
+         <spatialResolution>
+            <MD_Resolution>
+               <distance>
+                  <gco:Distance uom="Meters">5</gco:Distance>
+               </distance>
+            </MD_Resolution>
+         </spatialResolution>
+         <language>
+            <LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php"
+                          codeListValue="eng"
+                          codeSpace="ISO639-2">eng</LanguageCode>
+         </language>
+         <characterSet>
+            <MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode"
+                                 codeListValue="utf8"
+                                 codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+         </characterSet>
+         <topicCategory>
+            <MD_TopicCategoryCode>environment</MD_TopicCategoryCode>
+         </topicCategory>
+         <environmentDescription>
+            <gco:CharacterString>Microsoft Windows 7 Version 6.1 (Build 7601) Service Pack 1; Esri ArcGIS 10.3.1.5004</gco:CharacterString>
+         </environmentDescription>
+         <extent>
+            <EX_Extent>
+               <geographicElement>
+                  <EX_GeographicBoundingBox>
+                     <extentTypeCode>
+                        <gco:Boolean>true</gco:Boolean>
+                     </extentTypeCode>
+                     <westBoundLongitude>
+                        <gco:Decimal>-28.171997</gco:Decimal>
+                     </westBoundLongitude>
+                     <eastBoundLongitude>
+                        <gco:Decimal>15.227695</gco:Decimal>
+                     </eastBoundLongitude>
+                     <southBoundLatitude>
+                        <gco:Decimal>45.501382</gco:Decimal>
+                     </southBoundLatitude>
+                     <northBoundLatitude>
+                        <gco:Decimal>65.171944</gco:Decimal>
+                     </northBoundLatitude>
+                  </EX_GeographicBoundingBox>
+               </geographicElement>
+            </EX_Extent>
+         </extent>
+      </MD_DataIdentification>
+   </identificationInfo>
+   <distributionInfo>
+      <MD_Distribution>
+         <distributionFormat>
+            <MD_Format>
+               <name>
+                  <gco:CharacterString>SDE Feature Class</gco:CharacterString>
+               </name>
+               <version gco:nilReason="missing"/>
+            </MD_Format>
+         </distributionFormat>
+         <distributor>
+            <MD_Distributor>
+               <distributorContact>
+                  <CI_ResponsibleParty>
+                     <individualName>
+                        <gco:CharacterString>Geographic Information Group</gco:CharacterString>
+                     </individualName>
+                     <organisationName>
+                        <gco:CharacterString>Scottish Natural Heritage</gco:CharacterString>
+                     </organisationName>
+                     <positionName>
+                        <gco:CharacterString>Data Supply</gco:CharacterString>
+                     </positionName>
+                     <contactInfo>
+                        <CI_Contact>
+                           <phone>
+                              <CI_Telephone>
+                                 <voice>
+                                    <gco:CharacterString>01463 725000</gco:CharacterString>
+                                 </voice>
+                              </CI_Telephone>
+                           </phone>
+                           <address>
+                              <CI_Address>
+                                 <deliveryPoint>
+                                    <gco:CharacterString>Great Glen House, Leachkin Road</gco:CharacterString>
+                                 </deliveryPoint>
+                                 <city>
+                                    <gco:CharacterString>INVERNESS</gco:CharacterString>
+                                 </city>
+                                 <postalCode>
+                                    <gco:CharacterString>IV3 8NW</gco:CharacterString>
+                                 </postalCode>
+                                 <country>
+                                    <Country codeList="http://www.iso.org/iso/country_codes/iso_3166_code_lists.htm"
+                                             codeListValue="GB"
+                                             codeSpace="ISO3166-1">GB</Country>
+                                 </country>
+                                 <electronicMailAddress>
+                                    <gco:CharacterString>data_supply@nature.scot</gco:CharacterString>
+                                 </electronicMailAddress>
+                              </CI_Address>
+                           </address>
+                        </CI_Contact>
+                     </contactInfo>
+                     <role>
+                        <CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode"
+                                     codeListValue="distributor"
+                                     codeSpace="ISOTC211/19115">distributor</CI_RoleCode>
+                     </role>
+                  </CI_ResponsibleParty>
+               </distributorContact>
+               <distributorFormat>
+                  <MD_Format>
+                     <name>
+                        <gco:CharacterString>ESRI shapefile</gco:CharacterString>
+                     </name>
+                     <version>
+                        <gco:CharacterString>ArcView 3.2</gco:CharacterString>
+                     </version>
+                  </MD_Format>
+               </distributorFormat>
+               <distributorTransferOptions>
+                  <MD_DigitalTransferOptions>
+                     <onLine>
+                        <CI_OnlineResource>
+                           <linkage>
+                              <URL>http://www.snh.gov.uk/publications-data-and-research/snhi-information-service/naturalspaces/</URL>
+                           </linkage>
+                           <protocol>
+                              <gco:CharacterString>http</gco:CharacterString>
+                           </protocol>
+                           <function>
+                              <CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode"
+                                                     codeListValue="download"
+                                                     codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+                           </function>
+                        </CI_OnlineResource>
+                     </onLine>
+                     <offLine>
+                        <MD_Medium>
+                           <name>
+                              <MD_MediumNameCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_MediumNameCode"
+                                                 codeListValue="cdRom"
+                                                 codeSpace="ISOTC211/19115">cdRom</MD_MediumNameCode>
+                           </name>
+                        </MD_Medium>
+                     </offLine>
+                  </MD_DigitalTransferOptions>
+               </distributorTransferOptions>
+            </MD_Distributor>
+         </distributor>
+      </MD_Distribution>
+   </distributionInfo>
+   <dataQualityInfo>
+      <DQ_DataQuality>
+         <scope>
+            <DQ_Scope>
+               <level>
+                  <MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode"
+                                codeListValue="dataset"
+                                codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+               </level>
+            </DQ_Scope>
+         </scope>
+         <lineage>
+            <LI_Lineage>
+               <statement>
+                  <gco:CharacterString>There are specific obligations on Member States under the EC Birds and Habitats Directives to avoid the deterioration of the natural habitats of the species and significant disturbance of the species for which SPAs have been designated. These obligations are implemented through domestic legislation in the Conservation (Natural Habitats, &amp;c.) Regulations 1994, as amended.  
+
+Designating Authority In Scotland
+Scottish Ministers
+
+Role of SNH
+SNH acts as the advisor to Government in proposing selected sites for Ministerial approval as proposed SPAs. SNH then undertakes  consultation over proposed sites with owners, occupiers, planning authorities and other  interested parties on behalf of Scottish Ministers.   
+
+Legislative Context
+Article  4  of  the  EC  Directive  on  the Conservation of Wild Birds 1979 (EC/79/409, as  amended  30.8.85 and 8.5.91):  commonly known as the Birds Directive.  In  GB  the designation is generally underpinned through the  SSSI mechanism for terrestrial  sites; the  Government is proposing new provisions for marine SPAs.</gco:CharacterString>
+               </statement>
+            </LI_Lineage>
+         </lineage>
+      </DQ_DataQuality>
+   </dataQualityInfo>
+</MD_Metadata>
