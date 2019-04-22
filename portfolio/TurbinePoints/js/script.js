@@ -96,6 +96,7 @@ $(document).ready(function(){
     };
     
     objOverlays = {
+		"Special Protection Area": lyrSPA,
         "Turbine Points":fgpPointLoc,
         "Buffers":fgpStudyPointBuff,
 		"Impacted Area": fgpImpactPointBuff
