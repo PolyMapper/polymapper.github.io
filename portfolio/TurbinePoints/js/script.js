@@ -1,5 +1,7 @@
 var mymap;
 var lyrOSM;
+var lyrSPA;
+var lyrSSSI;
 var ctlAttribute;
 var ctlScale;
 var ctlZoom;
@@ -78,11 +80,12 @@ $(document).ready(function(){
     fgpImpactPointBuff.addTo(mymap);
 	
 	lyrSPA = L.geoJSON.ajax('data/EdinburghSPA_WGS84.geojson',{style:{color:'yellow', dashArray:'5,5', fillOpacity:0},onEachFeature:processSPA}).addTo(mymap);
-	console.log(lyrSPA);
-	
+
+	lyrSSSI = L.geoJSON.ajax('data/EdinburghSSSI_WGS84.geojson',{style:{color:'red', dashArray:'5,5', fillOpacity:0},onEachFeature:processSPA}).addTo(mymap);	
 	
 	/*lyrSPA.bindPopup("SPA");*/
 	lyrSPA.bringToFront();
+	lyrSSSI.bringToFront();
 	
 
     // ********* Setup Layer Control  ***************
@@ -97,6 +100,7 @@ $(document).ready(function(){
     
     objOverlays = {
 		"Special Protection Area": lyrSPA,
+		"Sites of Special Scientific Interest": lyrSSSI,
         "Turbine Points":fgpPointLoc,
         "Buffers":fgpStudyPointBuff,
 		"Impacted Area": fgpImpactPointBuff
@@ -147,25 +151,56 @@ $(document).ready(function(){
 		/*calculate area*/
         var area = calcArea(pointLocGroupBuf);
 		
-		/*intersect*/
-		var intStudyArea = intersectPolyByPolyFC(pointLocGroupBuf, lyrSPA.toGeoJSON());
+		/*intersect tests on study area*/
 		
-		L.geoJSON(intStudyArea, {style:{color:'red', weight:5}}).addTo(mymap);
+		var testInterSPA = determineIfIntersect (pointLocGroupBuf, lyrSPA.toGeoJSON());
+
+				
+		var testInterSSSI = determineIfIntersect (pointLocGroupBuf, lyrSSSI.toGeoJSON());
+		
+
+				
+		
+		
+/*		L.geoJSON(intStudyArea, {style:{color:'red', weight:5}}).addTo(mymap);*/
 		
 		/*style the dissolved buffer*/
         pointLocGroupBuf = L.geoJSON(pointLocGroupBuf, {style:{color:'red', dashArray:'5,5', fillOpacity:0}})
 		
-		/*determine tooltip*/
-		console.log(intStudyArea.features.length);
 		
-		if (intStudyArea.features.length > 0) {
-			var ttSPA = "<h4> Study Area</h4> <br> AREA: "+area+"km sq <br> INTERSECTS: SPA"
+		/*testing the intersections of the main area*/
+		var ttText = ""
+		if (testInterSPA) {
+			if (ttText.length <= 42){
+				ttText = "<h4> Study Area</h4> <br> AREA: "+area+"km sq <br> INTERSECTS: <br> &nbsp;&nbsp;&nbsp;&nbsp SPA"
+
+			}
+			else {
+				ttText += "<br> &nbsp;&nbsp;&nbsp;&nbsp SPA"
+			}
+			
 		}
-		else{
-			var ttSPA = "<h4> Study Area</h4> <br> AREA: "+area+"km sq"
-		}
+		else {
+
+			ttText = "<h4> Study Area</h4> <br> AREA: "+area+"km sq"
+		}	
 		
-		pointLocGroupBuf.bindTooltip(ttSPA).addTo(mymap);
+		if (testInterSSSI) {
+			if (ttText.length <= 42){
+				ttText = "<h4> Study Area</h4> <br> AREA: "+area+"km sq <br> INTERSECTS: <br> &nbsp;&nbsp;&nbsp;&nbsp SSSI"
+			}
+			else {
+				ttText += "<br> &nbsp;&nbsp;&nbsp;&nbsp SSSI"
+			}
+			
+		}
+		else {
+			if (ttText.length <= 42){
+				ttText = "<h4> Study Area</h4> <br> AREA: "+area+"km sq"
+			}
+		}		
+		
+		pointLocGroupBuf.bindTooltip(ttText).addTo(mymap);
 		
 		/*add to map*/
 		fgpStudyPointBuff.addLayer(pointLocGroupBuf);
@@ -178,9 +213,64 @@ $(document).ready(function(){
 		
 		var impactArea = calcArea(impactPntBuff);
 		
+		/*intersect tests on high impact area*/
+		var testInterSPA_HI = determineIfIntersect (impactPntBuff, lyrSPA.toGeoJSON());
+		
+		var testInterSSSI_HI = determineIfIntersect (impactPntBuff, lyrSSSI.toGeoJSON());
+		
+		console.log("HI SPA Area " + testInterSPA_HI)
+		console.log("HI SSSI Area " + testInterSPA_HI)
+		
         impactPntBuff = L.geoJSON(impactPntBuff, {style:{color:'blue', dashArray:'5,5', fillOpacity:0}});
 		
-		impactPntBuff.bindTooltip("<h4>Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq").addTo(mymap);
+		
+	/*testing the intersections of the high impact area area*/
+		var ttTextHI = ""
+		console.log("testing..." + testInterSPA_HI)
+		console.log("length..." + ttTextHI.length)
+		if (testInterSPA_HI) {
+			console.log("Text loc 1: " + ttTextHI)
+			if (ttTextHI.length <= 45){
+				ttTextHI = "<h4> Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq <br> INTERSECTS: <br> &nbsp;&nbsp;&nbsp;&nbsp SPA"
+
+			}
+			else {
+				ttTextHI += "<br> &nbsp;&nbsp;&nbsp;&nbsp SPA"
+			}
+			
+			console.log("Text loc 2: " + ttTextHI)
+			
+		}
+		else {
+
+			ttTextHI = "<h4> Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq"
+			
+			console.log("Text loc 3: " + ttTextHI)
+		}	
+		
+		console.log("testing..." + testInterSSSI_HI)
+		console.log("length..." + ttTextHI.length)
+		console.log("Text loc 4: " + ttTextHI)
+		if (testInterSSSI_HI) {
+			if (ttTextHI.length <= 45){
+				ttTextHI = "<h4> Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq <br> INTERSECTS: <br> &nbsp;&nbsp;&nbsp;&nbsp SSSI"
+			}
+			else {
+				ttTextHI += "<br> &nbsp;&nbsp;&nbsp;&nbsp SSSI"
+			}
+			console.log("Text loc 5: " + ttTextHI)
+			
+		}
+		else {
+
+			if (ttText.length <= 45){
+				ttTextHI = "<h4> Hight Impact Area</h4> <br> AREA: "+impactArea+"km sq"
+			}
+
+		}
+		console.log("Text loc 6: " + ttTextHI)
+		
+		impactPntBuff.bindTooltip(ttTextHI).addTo(mymap);
 		
 		fgpImpactPointBuff.addLayer(impactPntBuff);
 		
@@ -226,6 +316,21 @@ function processSPA(json, lyr){
 	lyr.bindTooltip("<h4>Name: "+att.NAME);
 }
 //  ***********  General Functions *********
+
+function determineIfIntersect(inPoly, inFcPoly) {
+	
+	var intStudyArea = intersectPolyByPolyFC(inPoly, inFcPoly);
+	
+		if (intStudyArea.features.length > 0) {
+			return true
+		}
+		else{
+			return false
+		}
+	
+	
+	
+}
 
 function intersectPolyByPolyFC(poly, fcPoly) {
 	console.log("Here 1");
