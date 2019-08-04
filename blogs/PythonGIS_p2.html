@@ -1,0 +1,605 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    
+    <!-- Meta Tag -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO -->
+    <meta name="description" content="Portfolio and blog website">
+    <meta name="author" content="Gordon McLachlan">
+    <meta name="url" content="polymapper.github.io">
+    <meta name="copyright" content="Gordon McLachlan">
+    <meta name="robots" content="index,follow">
+    
+    
+    <title>Gordon McLachlan - Adventures of a Geographer</title>
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../images/favicon/favicon.png">
+    <link rel="apple-touch-icon" sizes="144x144" type="image/x-icon" href="../images/favicon/apple-touch-icon.png">
+    
+    <!-- All CSS Plugins -->
+    <link rel="stylesheet" type="text/css" href="../css/plugin.css">
+    
+    <!-- Main CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    
+    <!-- Google Web Fonts  -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:400,300,500,600,700">
+    
+    
+    <!-- HTML5 shiv and Respond.js support IE8 or Older for HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+	   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+
+  </head>
+
+ <body>
+
+	
+     
+	 <!-- Preloader Start -->
+     <div class="preloader">
+	   <div class="rounder"></div>
+      </div>
+      <!-- Preloader End -->
+      
+      
+    
+    
+    <div id="main">
+        <div class="container">
+            <div class="row">
+            	
+               
+                 
+                 <!-- About Me (Left Sidebar) Start -->
+                 <div class="col-md-3 col-lg-4">
+                   <div class="about-fixed">
+                    
+                     <div class="my-pic">
+                        <img src="../images/pic/profile-pic-bigger.jpg" alt="">
+                        <a href="javascript:void(0)" class="collapsed" data-target="#menu" data-toggle="collapse"><i class="icon-menu menu"></i></a>
+                         <div id="menu" class="collapse">
+                           <ul class="menu-link">
+                               <li><a href="../about.html">About</a></li>
+                               <li><a href="../index.html">Blog</a></li>
+							   <li><a href="../work.html">Portfolio</a></li>
+                               <li><a href="../contact.html">Contact</a></li>
+                            </ul>
+                         </div>
+                        </div>
+                      
+                      
+                      
+                      <div class="my-detail">
+                    	
+                        <div class="white-spacing">
+                            <h1>Gordon McLachlan</h1>
+                            <span>GIS Consultant</span>
+                        </div> 
+                       
+                       <ul class="social-icon">
+                         <li><a href="https://twitter.com/timorous_beasty" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a></li>
+                         <li><a href="https://www.linkedin.com/in/gordon-mclachlan-1b7a6355/" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- About Me (Left Sidebar) End -->
+                
+                
+                
+                
+                 
+                 <!-- Blog Post (Right Sidebar) Start -->
+                 <div class="col-md-9 col-lg-8">
+                    <div class="col-md-12 page-body">
+                    	<div class="row">
+                    		
+                            
+                            <div class="sub-title">
+                           		<a href="../index.html" title="Go to Home Page"><h2>Back Home</h2></a>
+                                <a href="#comment" class="smoth-scroll"><i class="icon-bubbles"></i></a>
+                             </div>
+                            
+                            
+                            <div class="col-md-12 content-page">
+                              <div class="col-md-12 blog-post">
+                            	
+                                
+                                <!-- Post Headline Start -->
+                                <div class="post-title">
+                                    <h1>Utilising GIS functions within Python – Part 2 – Reading and Manipulating spatial data with Geopandas</h1> 
+                                   </div>
+                                   <!-- Post Headline End -->
+                                    
+                                    
+                                <!-- Post Detail Start -->
+                                <div class="post-info">
+                                    <span>February 9, 2019 / by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                   </div>
+                                   <!-- Post Detail End -->
+                                    
+                                    
+                                    <p>This is a continuation of the Utilising GIS functions within Python Series. If you have not already viewed Part 1, go find it and read it. It introduces the basics functions of spatial data within Python.</p>
+                                    
+                                
+                                <!-- Post Image Start -->
+                                <div class="post-image margin-top-40 margin-bottom-40">
+                                   <img src="../images/blog/1.jpg" alt="">
+                                   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+                                  </div>
+                                  <!-- Post Image End -->
+                                  
+                                   <div class="post-title">
+                                    <h2>Importing and viewing Shapefiles</h2> 
+                                   </div>                                 
+                
+                                   
+                                   <p>Spatial data can imported and read using Geopandas using gpd.read_file() the function:</p>
+                                 
+                                  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Import the geopandas module
+										import geopandas as gpd
+										import pylab
+
+										# Set filepath
+										fp = "D:/myLoc/DAMSELFISH_distributions.shp"
+
+										# Read file using gpd.read_file()
+										data = gpd.read_file(fp)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->
+								  
+                                   <p>To view the data type of the imported data use the following</p>
+								  
+								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Viewing the data type of the imported data
+										print(type(data))
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
+								  
+                                   <p>From this we can see that the data type is a GeoDataFrame. This data type extends the functionality provided by the pandas.DataFrame in a way that allows it to use spatial data.</p>	
+
+                                   <p>There are a number of functions that are particularly useful in GIS</p>		
+
+                                   <p>The first of these is the head function. This prints the first 5 rows of the data.</p>		
+								  								  
+								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Print the first 5 rows of data
+										print(data.head())
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
+								  
+                                   <p>Secondly, we can look to see what the data looks like on a map. The pylab.show presents the map to us</p>										  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#View the data on the map
+										data.plot()
+										
+										pylab.show() 
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+								  
+								  
+                           		  <div class="post-title">
+                                    <h2>Coordinate reference system (CRS)</h2> 
+                                  </div>      								  
+								  
+								  
+                                   <p>The shapefile that is imported should always contain information about the coordinate system in which the data is projected.</p>	
+								  
+                                   <p>It is possible to view this information by viewing the .crs attribute:</p>	
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Viewing the coordinate reference system
+										print(data.crs)  
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->	
+								  
+								 
+                                   <p>The data here is projected using EPSG: 4326. The EPSG (European Petroleum Survey Group) is a code that tells us about the coordinate system of the data set. EPSG: 4326 belongs to the WGS84 coordinate system, which is a lat/lon coordinate system and is a common worldworde projection.</p>	
+								  
+								  
+	                           	<div class="post-title">
+                                    <h2>Writing a shapefile</h2> 
+                                  </div>      								  
+								  
+
+                                   <p>Writing a spatial file is a very common action needed for GIS. This task can easily be completed using Geopandas.</p>	
+								  
+                                   <p>Firstly, I have selected the top 50 rows of the inputted data by using the index slicing.</p>									 
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Selecting the data to be written out
+										selection = data[0:50]
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+								  
+                                   <p>Next the data can be outputted to a new shapefile:</p>		
+								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#creating an output path
+										out = r"D:/myLoc/DAMSELFISH_distributions_SELECTION.shp"
+										
+										#write the selection into a new shapefile (the shapefile file is the default)
+										selection.to_file(out)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->
+								  
+								  
+                                   <p>This file can be opened in QGIS or ArcGIS for assessment.</p>		
+								  								  
+								  
+								  
+		                          <div class="post-title">
+                                    <h2>Manipulating Geometries</h2> 
+                                  </div>   							  
+								  
+								  
+                                   <p>Geopandas makes use of Shapely’s geometric objects. These geometries are stored in a column called geometry.</p>								  
+								  
+
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Printing the geometry data
+										data['geometry'].head()		
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
+								     
+                                   <p>Since the spatial data is stored as a Shapley object it is possible to use the functionality of the Shapley module.</p>	
+								  
+                                   <p>In this example we can print the areas. First we select the data we want, in this case the top 5 rows.</p>	
+								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# selecting the top 5 rows
+										selection = data[0:5] 
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+                                   <p>Secondly, we iterate over each of the rows, calculating then printing the area of each</p>	                               
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#iterate over these rows and print the area for each
+										for index, row in selection.iterrows():
+											#caclulate the area
+											poly_area = row['geometry'].area
+											
+											#print
+											print("Polygon area at index {0} is: {1:.3f}".format(index, poly_area))
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->                                     
+                                   <p>We could take this further by adding this data into our original data.</p>   
+								  
+                                   <p>Add a column called Area, which will be blank.</p>       
+                                  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Adding a blank area column
+										data['area'] = None  
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->   
+								  
+								  
+                                   <p>Next we iterate over all the rows in the data, updating the area column to be the area of the zone.</p>
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Calculating the area of the zones, one by one.
+										
+										for index, row in data.iterrows():
+											# Update the value in 'area' column with area information at index
+											data.loc[index, 'area'] = row['geometry'].area
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->  
+								  
+								  
+                                   <p>Print the first two rows see what it looks like</p>								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#Print the first two rows.
+										print(data['area'].head(2))
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->				
+								  
+                                   <p>From this data we can determine in the maximum and the minimum values</p>								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Determining the maximum and the minimum
+										# Maximum area
+										max_area = data['area'].max()
+										
+										# Minimum area
+										min_area = data['area'].mean()
+										print("Max area: %s\nMean area: %s" % (round(max_area, 2), round(min_area, 2)))
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->	
+								  
+								  
+		                          <div class="post-title">
+                                    <h2>Creating Geometries</h2> 
+                                  </div>   								  
+
+                                   <p>We are also able to create shapefiles from scratch. This is useful as it allows for the easy conversion of text files that contain coordinates into spatial data (i.e. a shapefile). pylab is being imported to allow for the map to presented back.</p>	
+                                   <p>Here we create an empty GeoDataFrame:</p>								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Import necessary modules first
+										import pandas as pd
+										import geopandas as gpd
+										from shapely.geometry import Point, Polygon
+										import fiona
+										import pylab
+										
+										# Create an empty geopandas GeoDataFrame
+										newdata = gpd.GeoDataFrame()
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->	
+								  
+                                   <p>To view what’s inside:</p>									  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#View the data
+										print(newdata)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->
+								  
+                                   <p>Now lets add some data into this blank shell: </p>									  
+								  
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Create a new column called 'geometry' to the GeoDataFrame
+										newdata['geometry'] = None
+										
+										#View the data
+										print(newdata)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
+								  
+                                   <p>Now lets add data to the geometry column: </p>									  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Coordinates of the St Andrew square, Edinburgh, in Decimal Degrees coordinates = [(-3.194334, 55.95456), (-3.193808, 55.953576), (-3.191888, 55.953894), (-3.192489, 55.954873)]
+										
+										# Create a Shapely polygon from the coordinate-tuple list
+										poly = Polygon(coordinates)
+										
+										# Check the type of this object
+										print(type(poly))
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+                                 <p>Then we can insert the polygon into the geometry column. </p>
+								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Insert the polygon into 'geometry' -column at index 0
+										newdata.loc[0, 'geometry'] = poly
+										
+										# Let's see what we have now
+										print(newdata)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+                                 <p>Adding another column for reference: </p>								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Add a new column and insert data
+										newdata.loc[0, 'Location'] = 'St Andrew Square'
+										
+										#Check the data again
+										print(newdata)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+								  
+                                    
+                                 <p>We can now add the CRS to our data frame. This is done using a Python module called Fiona, which has a ncie function called from_epsg(). This is designed for passing coordinate system into the GeoDataFrame.</p>									  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Import specific function 'from_epsg' from fiona module
+										from fiona.crs import from_epsg
+										
+										# Set the GeoDataFrame's coordinate system to WGS84
+										newdata.crs = from_epsg(4326)
+										
+										# Let's see how the crs definition looks like
+										print(newdata.crs)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+                                 <p>To view this data that we have created:</p>								  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										#View the data on the map
+										newdata.plot()
+										
+										pylab.show()
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->	
+								  
+								  
+                                 <p>Finally we can export this GeoDataFram to a file using the .to_file() function.</p>										  
+                                  <!-- Post Coding (SyntaxHighlighter) Start -->
+                                  <div class="margin-top-40 margin-bottom-40">  
+                                   <pre class="brush: js">
+										# Determine the output path for the Shapefile
+										out = r"D:/myLoc/StAndrewSquare.shp"
+										
+										# Write the data into that Shapefile
+										newdata.to_file(out)
+                                  </pre>
+                                 </div>
+                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
+								  
+                                 <p>That concludes this part of the series. The next section will look at Geocoding data.</p>										  
+								  
+								  
+                                  <!-- You May Also Like Start -->
+                                  <div class="you-may-also-like margin-top-50 margin-bottom-50">
+                                    <h3>You may also like</h3>
+                                     <div class="row">
+                                 
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                      <a href="../PythonGIS_p1.html"><p>Utilising GIS functions within Python – Part 1 – Creating and using basic geometry</p></a>
+                                     </div>
+                    
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                      <a href="../PythonGIS_p3.html"><p>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</p></a>
+                                     </div>
+                    
+                                    <div class="col-md-4 col-sm-6 col-xs-12">
+                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                     </div>
+                                    
+                                    </div>
+                                  </div>
+                                  <!-- You May Also Like End -->
+                                    
+                                   
+
+                                </div>    
+                             </div>
+                              
+                         </div>
+                           
+                           
+                         </div>
+                     
+                     
+                       
+                       <!-- Footer Start -->
+                       <div class="col-md-12 page-body margin-top-50 footer">
+                          <footer>
+                          <ul class="menu-link">
+                               <li><a href="../index.html">Home</a></li>
+							   <li><a href="../about.html">About</a></li>
+                               <li><a href="../index.html">Blog</a></li>
+                               <li><a href="../work.html">Portfolio</a></li>
+                               <li><a href="../contact.html">Contact</a></li>
+                            </ul>
+                            
+                          <p>© Copyright 2019 Gordon McLachlan. All rights reserved</p>
+						  
+						  
+
+                           
+                         </footer>
+                       </div>
+                       <!-- Footer End -->
+                     
+                     
+                  </div>
+                  <!-- Blog Post (Right Sidebar) End -->
+                
+            </div>
+         </div>
+      </div>
+    
+    
+    
+     
+      
+    
+    
+    
+    <!-- Back to Top Start -->
+    <a href="#" class="scroll-to-top"><i class="fa fa-long-arrow-up"></i></a>
+    <!-- Back to Top End -->
+    
+    
+    <!-- All Javascript Plugins  -->
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/plugin.js"></script>
+    
+    <!-- Main Javascript File  -->
+    <script type="text/javascript" src="../js/scripts.js"></script>
+    
+    <!-- Syntax Highlighter Javascript File  -->
+    <script type="text/javascript" src="../js/syntax/shCore.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushCss.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushJScript.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushPerl.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushPhp.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushPlain.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushPython.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushRuby.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushSql.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushVb.js"></script>
+    <script type="text/javascript" src="../js/syntax/shBrushXml.js"></script>
+    
+	<!-- Syntax Highlighter Call Function -->
+	<script type="text/javascript">
+		SyntaxHighlighter.config.clipboardSwf = '../js/syntax/clipboard.swf';
+		SyntaxHighlighter.all();
+	</script>
+
+    
+   </body>
+ </html>
