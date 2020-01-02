@@ -1,0 +1,39 @@
+body {
+  font-family: "Lato", sans-serif;
+}
+
+#mapdiv {
+    background-color: black;
+    height:100vh;
+    margin: 0
+}
+
+.col-xs-12, .col-xs-6, .col-xs-4 {
+    padding:3px;
+}
+
+#divPub {
+    background-color: beige;
+}
+
+.errorMsg {
+    padding:0;
+    text-align:center;
+    background-color:darksalmon;
+}
+
+/*any emprty divs will be blank*/
+div:empty {
+   display: none;
+}
+
+#btnSideBar {
+/*    position: absolute;
+    top:-1vh;
+    right:-47vw; */
+/* position: fixed;
+    top:10vh;
+    left:57vw;*/
+    z-index: 2001
+
+}

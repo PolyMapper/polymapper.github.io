@@ -1,0 +1,9 @@
+have a web app that takes your location, and checks when you are within 10m of the clue/site.
+
+When you are the clue icon popups up on the map. You press on it and it will open up a quiz. Go through the quiz, and once you get all the correct answers it gives you another clue. These could be riddles.
+
+Create a web version first then an android app. This is so the web app is a backup 
+
+https://developer.android.com/training/basics/firstapp/creating-project
+
+https://developer.android.com/samples
