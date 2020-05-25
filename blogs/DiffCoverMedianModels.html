@@ -118,118 +118,30 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>The Differences between Coverage Models and Median Models</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>March 1, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
                                     
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                    <p>The fundamental aim of a location-allocation model is to determine the optimal location for facilities in relation to a particular demand set. This is done by simultaneously selecting facility locations and allocating demand to these facilities in order to minimise a measurable criterion. The most commonly used location-allocation models can be classified into median and coverage. While both models attempt to find suitable facility locations they differ in terms of their objective functions.</p>
+
+                                    <p>Median models aim to solve the p-median problem, first discussed by Hakimi (1964), by locating facilities with the objective of minimising demand weighted distance between all demand and supply nodes. For demand at a fixed scale, this is comparable to reducing average distance, consequently maximising the accessibility of each facility for the majority of demand. These models are suitable for use where services provided by the facility are demanded on a regular basis, such as supermarkets.</p> 
+									
+                                    <p>Within this framework, a network of facilities that provide the smallest possible weighted distance is referred to as the optimal solution, however, the p-median problem is a non-deterministic polynomial (NP) hard, and subsequently, classic determinist approaches are often unable to supply an optimal solution within an acceptable amount of computing time. Therefore, heuristics were incorporated as an alternative search approach by Teitz & Bart (1968), and have been built on with use of simulated annealing, genetic algorithms, and tabu search. Church (1999) also highlighted that, with the use of Lagrangian relations, p-median problems could be solved with up to a thousand demand nodes.</p>				
+
+                                    <p>The aim of a p-median model is to decrease the global average distance between facilities and demand. Consequently, the gravitational draw of facilities to urban centres with high demand, leaves rural areas are under served. This model is inappropriate for many applications, such as emergency service facilities. Coverage models can mitigate this issue, as they focus on providing coverage within a set distance or drive time; demand is classed as covered when it is within the proximal range of a facility. Coverage models do not explicitly measure the distance between demand and the facility: they only determine if demand is covered or not. Therefore, distance is considered in a binary format, rather than a realistic metric, in contrast to median models where distance is fundamental to the model’s objective.</p>										
+
+                                    <p>Locational Set Covering Problem (LSCP) and the Maximal Covering Location Problem (MCLP) are two of the most commonly used coverage models. The LSCP, first suggested by Toregas et al. (1971), aims to locate the minimum number of facilities that cover all of the demand nodes. That being said, in reality, total coverage is rare because of resource limitations. Therefore, Church & ReVelle (1974) proposed the MCLP, which aims to maximise covered demand, but is constrained by a set number of facilities, which acts as a resource limit. Even though Current & Schilling (1990) describe coverage models as NP-hard, in contrast to the p-median model, the MCLP is computationally less costly, and can cope with thousands of demand and facility nodes. Extensions to LSCP and MCLP are numerous, and can account for the existence of congestion, delays of queues, and busyness probabilities amongst others.</p>
+
+                                    <p>The differences between median and coverage models are manifested through their objective functions, where median models aim to minimise the global average distance, and coverage models use a set distance or drive time, focusing much more on maximising demand coverage. P-median models are more computationally expensive, resulting in extensive heuristic approaches being developed in the search for optimal solutions; these restrictions are much less pronounced within coverage models.</p>									
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -241,11 +153,11 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../PythonGIS_p2.html"><p>Utilising GIS functions within Python – Part 2 – Reading and Manipulating spatial data with Geopandas</p></a>
+                                      <a href="../ChallBigData.html"><p>The Challenges of Big Data in GIS</p></a>
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../LimitCensusLocAllo.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
                                      </div>
                                     
                                     </div>

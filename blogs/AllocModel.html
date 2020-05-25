@@ -118,118 +118,29 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Why Use-Allocation Models</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>May 7, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
                                     
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                    <p>Location-allocation models are primarily designed to optimise the locations of facilities, at various scales, in relation to spatial distribution of demand, under a series of constraints. These models allow greater comprehension of underlying relationships found between accessibility and location of a facility over time and space. They can be applied to existing sites as well as possible future locations. Often location-allocation models are used in combination with geographical information systems (GIS). Early GIS lacked the capability to tackle issues raised by location analysts. In recent years GIS have embedded location-allocation models within their software, for example ArcGIS has Teritz-Bart heuristics built in. This kind of development has given geographers the ability to address sophisticated issues on locality.</p>
+
+                                    <p>Commonly the results of location analysis support policy makers and those optimising health service provision. Herein lies the two key areas of application for location-allocation models: public service provision, including health services; and locating and optimising emergency service facilities. Using location-allocation models to optimally locate public services can lead to cost reductions though fewer sites reaching more people. Comber et al. (2009) was able to suggest a reduction in post office locations within the UK, in line with governmental expectations, while minimising the potential impacts of closing them. Through the use of a genetic algorithm based location model, the authors proposed an optimised network which reduced the impact not only on rural and remote areas, but also deprived urban areas, where a greater proportion of people live. Park (2012) not only recommended optimal library locations, but also provided details on the socio-economic status of those within the vicinity of the library, so they could better tailor their services and increase usage. Location-allocation models also ensure that public services are sufficiently accessible. Moller-Jensen & Kofie (2001), who explored health service planning within Ghana, used a location-allocation model to evaluate various scenarios with the aim of enhancing accessibility. Sasaki et al. (2011) applied a genetic algorithm within the location model to suggest optimised locations for immunisation centres in terms of accessibility within Zambia.</p> 
+									
+                                    <p>Within emergency services, optimal siting can literally be a matter of life and death. Sasaki et al. (2010) used a genetic algorithm based location-allocation model to optimise current and future networks of ambulance locations in Niigata, Japan, using demand forecast to the year 2030. They concluded that with better location of ambulance sites, response times could be reduced, increasing pre-hospital survival rates. Specifically, they modelled reduced average response times by 57 seconds. Comber et al. (2011) followed up the work of Sasaki et al. (2010), using a modified genetic algorithm with the location-allocation model, also within Niigata. Within this study, the optimised locations average response times where reduced by 1 minutes and 14 seconds. In the city of Louisville, Kentucky, Rosero-Bixby (2004) applied a location model for optimising locations of all types of emergency vehicles. The authors found that with better placement, response times were reduced for all vehicle types.</p>				
+
+                                    <p>Although there are many examples of location-allocation models within the literature it is evident that the vast majority of application are within the public sector. Hodgson (1981) suggested that other models, such as spatial interaction models, would be more fitting for the private sector. Hodgson also proposed that customers will not always travel to the nearest centre: other factors come into play. However, there are many example of private sector application of location-allocation models, such as locating automatic teller machines, studied by Aldajani & Alfares (2009), or selecting appropriate sites for retail stores, as described by Goodchild (1984).</p>										
+
+                                    <p>Location has a large influence over the successes of public or private sector facilities, and can potentially be a matter of life or death. The results of location-allocation models, like those described above, can be utilised by decision makers, and help enable informed location planning. Although it has been noted that location-allocation models are more suited to public sector applications, it is still a useful tool for the private sector.</p>
+									
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -241,11 +152,11 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../PythonGIS_p2.html"><p>Utilising GIS functions within Python – Part 2 – Reading and Manipulating spatial data with Geopandas</p></a>
+                                      <a href="../ChallBigData.html"><p>The Challenges of Big Data in GIS</p></a>
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../LimitCensusLocAllo.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
                                      </div>
                                     
                                     </div>

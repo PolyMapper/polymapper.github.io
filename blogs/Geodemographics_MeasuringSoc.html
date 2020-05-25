@@ -118,118 +118,39 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Using Geodemographics to Measure Social Change</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>October 7, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
-                                    
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                   <div class="post-title">
+                                    <h2>Measuring Society</h2> 
+                                   </div>   
+								   
+                                    <p>As a second part in the series, today I will be discussing measuring social change using geodemographics. There is currently a renaissance in the literature, with the growing realisation that geodemographic can be used to comprehend social phenomena beyond the current aspatial index summary measures (Sabater, 2015). A major advantage of geodemographics is their ability to simplify and unify complex and large data sets into values that are easily understood (Voas & Williamson, 2001). In the private sector, geodemographic segmentation has been employed to gain a greater comprehension of the underlying spatial differences in economic, social, and demographic composition geographical areas, allowing for efficient and effective targeting of resources (Liu & Ong, 2008). It is for these reasons that the public sector and academic communities are starting to regain interest. Geodemographics offer the opportunity to understand the salient characteristics of a neighbourhood, with the potential benefits of aiding policy makers in their decisions and subsequent implementation of measures. Applications within the public sector are varied, with geodemographics being employed in fields such as health, local governance, and social research (Shelton et al., 2006).</p>
+
+                                    <p>Within the academic geodemographic literature, the most common applications are within the fields of health and health inequalities, and can be used to help governments develop geographically targeted policies. Petersen et al. (2011) evaluated the use of geodemographics classifications to make inferences about patterns of local health needs, which was extended by Petersen et al. (2011) with the use of a bespoke geodemographic system to help public health authorities in London to target specific neighbourhoods most at need of their health campaigns. Another example is Bately et al. (2008), who used the 2001 OAC in combination with the Multiple Deprivation Index to highlight areas of high deprivation concentration. In a similar fashion, Birkin and Clarke (2011) employ the 2001 OAC within a spatial microsimulation model to estimate car ownership and birth rates within Leeds. Within this example, geodemographics are not used to explain trends, but used as a way of improving spatial estimates of social phenomena in order to support public policy.</p> 
+									
+									
+                                   <div class="post-title">
+                                    <h2>Measuring Social Change</h2> 
+                                   </div>   									
+									
+                                    <p>Geodemographics are inherently static, capturing a particular moment in time; a single geodemographics classification is not able to indicate where, or even if, there has been any shift in the socio-economic structure (Vickers, 2010). That being said, Vickers (2010) explained that if an equivalent data set could be collected, a classification from an earlier time period could be compared to a more recent classification. The assessment of these classifications would reveal residential patterns over time (Vickers, 2010). With geodemographics we are able to gain a greater understanding of the nuances of changes found within the greater pattern of change, as they allow for the comparison of compositional characteristics which can be hidden through the use of traditional measures.</p>				
+
+                                    <p>Geodemographics have three describable attributes in regard to comprehending societal changes. Firstly, they are able to distil a plethora of data into a single, understandable, classification. Secondly, they can be quickly visualised and understood. Visualisation is an important part of understanding the relationship between the geodemographics classifications, and help highlight areas that may need help or actions taken (Negru, 2015). Thirdly, through the calculation of cluster centres for each variable during the creation of the geodemographic, it is possible to determine the most prevalent attributes of each cluster (Burns, 2016). It is often these calculations that aid the naming of clusters, however, they could also be used in comparing classification transformation over time, as it enables the evaluation of the socio-economic and demographic characteristics of an area over time, and to determine which are more stable, and therefore more ingrained.</p>										
+
+                                    <p>There are few examples of longitudinal studies using geodemographics to measure social change (Turnstall, 2016), however there are some key studies do exist. One such study was conducted by Vickers (2010) who, through geodemographic reassignment, highlighted changes in the underlying demographic processes, thus revealing areas of social change between 1991 and 2001. Vickers (2010) discovered that there was an increased polarisation of society in terms of socio-economic position. Shelton et al. (2006) employed a longitudinal geodemographics to gain comprehension of mortality patterns from 1981 to 2000. Within this paper no data harmonisation was used to conduct the study, instead the authors chose to use European parliamentary districts (EPDs), which are large enough to be geographically stable over time. However, this does run the risk of having geographies that are not contiguous at any geographical scale. Shelton et al. (2006) found that there was in fact little cluster transformation, with 82% experiencing no change in cluster classification over the 20 years studied. Although the authors did note that former mining communities and coastal areas are much more dynamic in terms of their mortality classifications than in urban areas. Sabater (2015) used geodemographics to explore migration patterns of EU migrants in the UK at a local, neighbourhood level. The research here concluded that EU migrants have increased their national presence in the UK due to their widening geographical dispersal and increasing population numbers. It would be interesting to revisit this study within the current political climate, including ‘Brexit’ and the Scottish independence vote. </p>
+
+
+                                    <p>Despite the advantages, the socio-economic dynamism of geographical areas has not received adequate attention within the geodemographic literature (Longely, 2012). There have been few papers within the literature that focus on the use of geodemographics on understanding the socio-economic characteristics of an area over time. Therefore, it is into this gap that this dissertation fits. Comparison of geodemographic classifications over time will allow for gained understanding on the ingrained social structure of an area. For instance, if an area transformed from one classification to another, through the assessment of the characteristics of each, the user could ascertain if any characteristics are similar. With the use of the methodology laid out by Norman et al. (2003), census data from different years, using different geographical units, can be harmonised in a manner that makes comparison possible. This data can be clustered using techniques illustrated by Vickers (2010), to create directly comparable geodemographic classifications for all years.</p>									
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -245,7 +166,7 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../PythonGIS_p3.html"><p>Utilising GIS functions within Python – Part 3 – Geocoding with Geopanda</p></a>
                                      </div>
                                     
                                     </div>

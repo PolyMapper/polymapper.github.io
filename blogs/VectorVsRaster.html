@@ -118,118 +118,84 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Vector vs Raster Data Models</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>January 5, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
                                     
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                    <p>There are two main types of data models available to GIS: vector and raster. Vector models are stored through individual entities in the form of points, lines, and polygons, with raster comprising grid cells of a predefined resolution. Within current literature there is debate about the utility of vector compared with that of raster, with some asserting that vector’s accuracy is superior, and more appealing because its graphic similarity to paper maps. However, any comparison between models should be made based on utility.</p>
+
+                                    <p>Differences between the models become apparent when conducting fundamental spatial operations. Vector models calculate Euclidean distance of lines and perimeters using Pythagorean theory (Heywood et al., 2011), based on explicit coordinate locations for each node. Area is calculated using geometry, and is computed by splitting polygons into smaller, less complicated shapes, enabling swift and efficient calculation. Coordinates give vector data precision and high positional accuracy, creating distance and area calculations with veracity.  Such calculations only need to be run once, with information being stored in attributable tables.</p> 
+									
+                                    <p>Raster distance and area calculations are simple and quick to run. Distance calculations use Euclidean distance, adding the number of cells in a straight line together and multiplying by the resolution.  However, distance can also be calculated using Manhattan distance, following the length of the path only using cell side lines, illustrated in Figure 1. In addition, raster structure allows distances to be calculated from one cell to all other cells, a process called proximity. Area can be calculated by adding together the number of cells in a region, then multiplying by the resolution.  However, built in resolution levels can mask geographical details, leading to underestimated results.</p>			
+
+									<div class="post-title">
+										<h3>Figure 1 – The blue line illustrates a line drawn using Manhattan distance. The red line is drawn using straight line, or Euclidean distance.</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/VectorVsRaster_fig-1.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->											
+
+                                    <p>Overlay analysis, in a vector model, is a process of placing a point, line or polygon on top of another map layer. Overlaid features can be combined using Boolean logic to get all overlaying features (union) (Figure 2), only features that are spatially coincidental (intersection) (Figure 3), and only features that are not spatially coincidental (symmetrical Difference) (Figure 4). Conducting an overlay with vector data may seem theoretically simple but it is operationally complex.  Underlying calculations determine the number of intersections occurring when drawing lines between entities and points outwith the polygon boundary (Figure 5).  Polygon in polygon overlay can expose issues. If polygon boundaries are not coincidental small polygons, called slithers, can be created at polygon boundaries, and produce abnormal results.</p>
+
+									<div class="post-title">
+										<h3>Figure 2 – Union (OR) Overlay – All input features that overlap features returned</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/VectorVsRaster_fig-2.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->		
+									
+									<div class="post-title">
+										<h3>Figure 3 – Intersection Overlay (AND) – Only features that overlap are returned</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/VectorVsRaster_fig-3.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->	
+									
+									<div class="post-title">
+										<h3>Figure 4 – Symmetrical Difference Overlay (XOR) – Only features that do not overlap.</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/VectorVsRaster_fig-4.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->										
+									
+									<div class="post-title">
+										<h3>Figure 5 – Point in Polygon calculation – lines are drawn from the entity to a point outside the polygon. The number of line intersection are calculated, with an odd number indicating the entity is within the polygon and an even number indicating it is outside the polygon. In this example the line from the red star has one intersection, telling us that the red star is inside the polygon.  The line from the blue star has two intersection, this means the blue star is outside of the polygon.</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/VectorVsRaster_fig-5.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->										
+									
+                                    <p>Boolean logic can similarly be used in Raster overlay (Figures 2-4), however raster models can also combine maps using various mathematical operations, using map algebra. Map algebra is a flexible and computationally quick overlay method. Issues can arise, however, when combining raster maps of different resolutions, although using appropriate resolution reduces unnecessary data approximation.</p>
+
+                                    <p>In a similar operational process to overlay, buffer analysis allows spatial questions to be asked about an entity’s neighbours. Vector model buffer analysis is conducted by overlaying a point, line, or polygon on a fixed or varied distance buffer polygon. As with overlay analysis is it complex and time consuming, depending on data volumes.</p>									
+									
+                                    <p>The raster model buffer analysis is quick, with the user selecting cells around the entity. However, it is often run in a number of steps; running a proximity analysis on the entity then reclassifying the result to produce a buffer of a designated distance. Reclassification allows for friction values to be added, making the buffer spread more flexible.</p>	
+									
+                                    <p>Vector data modelling is dominant, having a high degree of spatial precision, and is not affected by issues of varying scale, but can be computationally complex. Raster data models have quick processing speeds and have some unique and powerful tools, however, predefined resolutions reduce potential accuracy.  Ultimately the appropriate data model depends on the analysis being conducted.</p>
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -241,11 +207,11 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../PythonGIS_p2.html"><p>Utilising GIS functions within Python – Part 2 – Reading and Manipulating spatial data with Geopandas</p></a>
+                                      <a href="../ChallBigData.html"><p>The Challenges of Big Data in GIS</p></a>
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../LimitCensusLocAllo.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
                                      </div>
                                     
                                     </div>

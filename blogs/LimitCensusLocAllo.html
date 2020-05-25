@@ -118,118 +118,32 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Limitations of using Census datasets with Location-Allocation models</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>June 13, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
                                     
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                    <p>Within location-allocation models it can be, in fact, impossible, or unnecessary, to represent every demand point.  
+									Many of the models used to solve location-allocation problems are NP-hard, therefore it would be challenging, if not impossible, 
+									to optimise with many thousands of points. Consequently, it is common to aggregate data to areal units as a means of data reduction. 
+									Aggregation on demand data is also carried out to maintain privacy, a good example of which is the census.</p>
+
+                                    <p>While aggregation may have positive aspects, it comes coupled with inherent analytical and theoretical issues. During data aggregation all the demands within a geographical area are assigned to a singular point (often the centroid). As a result, the spatial distribution of demand is overgeneralised, thus causing errors. Aggregation error is manifested in different ways, depending on the model used to solve the location-allocation problem. Within the literature, there is a clear divide between median models and coverage models, therefore this discussion will be structured to reflect this.</p>                                    
+                                    <p>In a well cited paper, Hillsman & Rhoda (1978), described three types of error within p-median models: source A, B, and C errors. Source A is linked to the inability to accurately measure average distance between a facility and it’s demand; distance is instead measured from the aggregation point of the demand. Related to this is source B, which is a special type of Source A, where the facility and the aggregated demand point have the same locality, therefore giving a distance of zero. Source C errors ensue when all the demand points within an areal unit are assigned to one facility, and it is assumed that all demand is evenly distributed, even though some of the demand points, in reality, would be closer to a different facility. This error is closely related to the modifiable areal unit problem (MAUP), where the spatial configuration of areal units can have a profound impact on the analysis. Hodgson et al. (1997) added to this by suggesting a source D error, which is a result of the aggregation of possible facility locations, leaving fewer potential facilities to choose from.</p>				
+
+                                    <p>Coverage models have their own set of related issues and limitations in regards to aggregated demand sets. Within coverage models, distance is not directly measured but is considered in a binary way, with the demand being covered (1) or not (0). Accordingly, errors in measurement of distance caused by data aggregation can be more significant for coverage models than p-median models. Current & Schilling (1990) illustrated analogues of the source ABC errors described by Hillsman & Rhoda (1978) for coverage models. They explained that when the coverage model is solved with aggregate demand data, it may be that a demand point is deemed as covered when in reality the point would not be. Additionally, the reverse can also be true, where the original demand point would be covered, but within the aggregate data it is considered to be out of the proximal limit. Current & Schilling also rationalised that within coverage models there is not an equivalent to source C errors.</p>										
+
+                                    <p>Aggregation error can result in two effects: the incorrect location of a facility recommendation, and an inaccurate objective function, which is the measure being used to optimise the model. Such consequences can have fundamental implications and restrict location model usage. Fotheringham et al. (1995) went so far as to say that location-allocation models should not be used for planning purposes. That being said there is no consensus on how to measure aggregate error. Therefore, aggregation should be avoided where possible, but where necessary, the aggregate errors discussed above should be considered, and mitigation methods contemplated.</p>
+
+									
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -245,7 +159,7 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../PythonGIS_p3.html"><p>Utilising GIS functions within Python – Part 3 – Geocoding with Geopanda</p></a>
                                      </div>
                                     
                                     </div>

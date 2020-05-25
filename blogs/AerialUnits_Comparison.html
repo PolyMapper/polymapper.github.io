@@ -118,118 +118,55 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Areal unit or surface data: Which is better for representing population?</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>December 2, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
-                                    
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                   <div class="post-title">
+                                    <h2>Measuring Society</h2> 
+                                   </div>   
+								   
+                                    <p>Public health, emergency planning, land use, and other socioeconomic sectors all use spatial analytical functions, such as spatial interaction modelling and catchment creation. To fully utilise the capability of these functions within a GIS, population data showing accurate spatial distribution is critical. Population data is often represented as either the widely used polygonal areal units, or as a raster continuous surface.</p>
+
+                                    <p>A census is a rich source of population data.  Privacy constraints mean census data is aggregated into areal units, such as Output Areas in the UK. The widespread use of areal units for population representation is partly owing to this release mechanism, but also due to its complete coverage and ability to be readily understood and explained. For example, Abbas et al. (2009) demonstrates the utility of geodemographics, based largely on census data and areal units, within the health care environment. </p> 
+  									
+									
+                                    <p>Although advantageous to use areal units for population representation, they do contain inherent analytical and theoretical issues. Areal units are often created by governments to suit administrative purposes, and frequently do not relate to natural population distributions.  Altering areal units could profoundly impact results of spatial analysis, an affect known as the modifiable areal unit problem (MAUP). Populations within areal units are also assumed to be homogenously distributed, resulting in spatial variability being lost, leading to misleading analytical results. The ecological fallacy is illustrated by Martin (1989), where an undeveloped dockland area in Cardiff was grouped with a neighbouring, socially disadvantaged, area, thus implying the dockland had the same high percentage of unemployed (Figure 1), although it has a small population and large bodies of water.</p>			
+
+									<div class="post-title">
+										<h3>Figure 1 - a) Cardiff Bay choropleth map illustrating percentage of unemployed (1981 census) by enumeration districts b) Residential areas of Cardiff Bay  </h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/AerialUnits_Comparison_fig-1.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->	
+
+
+                                    <p>The need for interzonal spatial distribution has driven the development of alternative methods of population representation. One such alternative is disaggregating areal unit data into a continuous surface through interpolation. Population surfaces can be created through relatively simple areal interpolation methods, such as population-weighted centroids, and areal weighting. They can also be created through more complex dasysmetric mapping methods, utilising ancillary data to make more detailed population estimates. </p>										
+
+                                    <p>There are many advantages to using a well-constructed population surface. Due to the continuous nature of surface data, they are not constrained by arbitrary boundaries, thus, allowing more detailed spatial distribution of populations and more accurate maps. Moreover, Minnis (2003) stated that population surfaces can be aggregated to most areal units, consequently decreasing MAUP. However, population will still be homogenous within each grid square, but to what extent will depend on resolution. An additional advantage is the ability to compare, overlay, and buffer, two or more population datasets with non-coincidental boundaries. This permits population data to be assessed temporally from census to census, regardless of areal unit change (Figure 2). It also enables disparate sources to be pulled together to aid analysis, e.g. health care provision or crime prevention.</p>
+
+									<div class="post-title">
+										<h3>Figure 2 – US areal census boundary changes between the 1980 to 1990 census (a) and 1990 to 2000 census (b). Taken from Holt et al. (2004).</h3> 
+                                    </div> 
+									<!-- Post Image Start -->
+									<div class="post-image margin-top-40 margin-bottom-40">
+									   <img src="../images/blog/AerialUnits_Comparison_fig-2.png" alt="">
+									   <p>Image source from <a href="#" target="_blank">Link</a></p>                                      
+									</div>
+									<!-- Post Image End -->	
+									
+                                    <p>While areal units are a common, and easy way to represent population data, they can be misleading. One way to circumvent these issues is to create a population surface. It must, however, be noted that population surfaces are just estimates, and quality is largely dependent on the source data and resolution. Each surface creation method has its own merits and drawbacks, with each making its own inherent assumptions on the relationship between ancillary and population or the use of distance decay, but that goes beyond the scope of this paper. </p>									
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -245,7 +182,7 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../PythonGIS_p3.html"><p>Utilising GIS functions within Python – Part 3 – Geocoding with Geopanda</p></a>
                                      </div>
                                     
                                     </div>

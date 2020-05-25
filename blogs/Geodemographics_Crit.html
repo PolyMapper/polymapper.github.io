@@ -118,118 +118,40 @@
                                 
                                 <!-- Post Headline Start -->
                                 <div class="post-title">
-                                    <h1>Utilising GIS functions within Python – Part 3 – Geocoding With Geopanda</h1> 
+                                    <h1>Critiques of Geodemographics</h1> 
                                    </div>
                                    <!-- Post Headline End -->
                                     
                                     
                                 <!-- Post Detail Start -->
                                 <div class="post-info">
-                                    <span>March 2, 2020 by <a href="#" target="_blank">Gordon McLachlan</a></span>
+                                    <span>November 11, 2019 by <a href="#" target="_blank">Gordon McLachlan</a></span>
                                    </div>
                                    <!-- Post Detail End -->
                                     
-                                    
-                                    <p>The aim of this GIS python tutorial is Goeocoding, which is a very common GIS task. There are a number of Python libraries that make this possible. The one that  will focus on here is geopy. Geopy uses a number of third-party geocoders to do this, however some require API access keys, for example Bing and Google require them.</p>
-                                    
-                                  <div class="post-title">
-                                    <h2>Geocoding in geopandas</h2> 
-                                  </div>  
-								  
-                                    <p>To start with I obtained 35 random addresses from <a href="https://www.doogal.co.uk/RandomAddresses.php"></a></p>
-								  
-                                    <p>I then created a text file with the random addresses, and then read in this file.</p>			
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Import necessary modules
-										import pandas as pd
-										import geopandas as gpd
-										from shapely.geometry import Point
-										
-										# Filepath
-										fp = r"D:/MyLoc/Python GIS/Addresses.txt"
-										
-										# Read the data
-										data = pd.read_csv(fp, sep=';')
-										
-										# Looking at the data
-										print(data.head())
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->
-								  
-								  
-                                  <p>We then want to start geocoding</p>									  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->								  
-                                  <p>We then want to start geocoding</p>								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Now we can start to geocode.
-										# Import the geocoding tool
-										from geopandas.tools import geocode
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>We geocoding I used a google access API that allows for 2500 requests per hour.</p>								  
-                                  <p>I have blanked the Code out.</p>																  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Notice: I have blocked this out, you will need to get your own key
-										key = XXX-API-KEY'
-										
-										# Geocode addresses
-										geo = geocode(data['address'], api_key=key)
-										
-										# lets look at the top two
-										print(geo.head(2))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->										  
-                                  <p>We then need to join back on our original table to get the IDs, and any other data we may have</p>	
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# Then we need to join this back into our original table
-										# Join tables by using a key column 'address'
-										join = geo.merge(data, on='address')
-										print(join.head())
-										
-										# to check the data type
-										print(type(join))
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-								  
-                                  <p>Finally, we can export this data as a shape file</p>									  
-								  
-                                  <!-- Post Coding (SyntaxHighlighter) Start -->
-                                  <div class="margin-top-40 margin-bottom-40">  
-                                   <pre class="brush: js">
-										# we can then export
-										# Output file path
-										outfp = r"D:/MyLoc/Python GIS/addresses.shp"
-										
-										# Save to Shapefile
-										join.to_file(outfp)
-                                  </pre>
-                                 </div>
-                                 <!-- Post Coding (SyntaxHighlighter) End -->									  
-                                  <p>In the next tutorial I will look at using this data, projecting it, doing some intersects and Point in polygons. Until then….</p>									  
-								  
-								  
+                                   <div class="post-title">
+                                    <h2>2.3.1.	Statistical limitations</h2> 
+                                   </div>   
+								   
+                                    <p>Geodemographics do have their inherent limits, and have been criticised from a number of different angles. Some authors focus on statistical concerns; geodemographics are usually created out with the traditional statistical frame work (Harris et al., 2007). Voas & Williamson (2001) proposed that variances between individual geodemographic classifications hide the potential wide diversity found within the classifications. If this was the case, then the differences found in geodemographics could be a result of the clustering method rather than actual socio-economic variances (Harris et al., 2007). While it is common that a standardised value indicating the prevalence or strength of a variable is provided, the measure of variance within the classification or a statistical significance between classifications are not (Harris et al., 2007). This can make it difficult to determine the significance of apparent trends found during analysis (Harris et al., 2007).</p>
+
+                                    <p>Related to the issues highlighted by Voas & Williamson (2001) is the ecological fallacy, which is an error where the characteristics of members of a group are based on average group data (O’Dowd, 2003). The assumption here is that groups of individuals that are similar enough to each other can be analysed together (O’Dowd, 2003). The ecological fallacy can be seen at two separate scales within geodemographic systems. Firstly, the areal units that comprise a geodemographic classification may not be particularly similar, with some more uniform than others (Harris et al., 2007). Secondly, even if all the areal units were identical, it this does not necessarily follow for the individuals contained within, which would require the characteristics to be homogenous (Harris et al., 2007). It is for this reason that geodemographics are often criticised for smoothing over local variations in characteristics (Singleton & Longely. 2009). This is obviously misleading, and throughout the history of area unit analysis researchers have been attempting to limit the impact of the ecological fallacy by using smaller geographical areal units and more complex algorithms. While these may improve the results, it is a fundamental problem that is far from being solved (Dalton & Thatcher, 2015). </p> 
+									
+                                    <p>An associated issue is MAUP, which is a consequence of arbitrarily defined areal units that do not follow natural breaks and boundaries in the social typologies of a population (Openshaw, 1984). This is illustrated clearly by Openshaw & Taylor (1979) when they completely changed the results of analysis by solely adjusting the boundaries of area units. More specifically, Openshaw & Taylor (1979) were able to obtain correlation values from 1 to -1 with the same set of data by solely adjusting the boundaries of the geographic units used. Therefore, it is clear to see, that the configuration of areal unit boundaries can profoundly impact on the results of analysis. Since the 1970s users of geodemographics have been attempting to mitigate this error by using smaller and smaller geographical units (Dalton & Thatcher, 2015). This method has seen some positive results, however, it does not completely remove the issue of non-natural boundaries. Openshaw (1984) argues that one of the most appropriate ways to deal with MAUP is make purpose specific areal unit systems, but this is not always easy to apply retrospectively. </p>
+
+                                    <p>Openshaw (1983) argues that due to geodemographics being an exploratory analytical technique, the result can only be determined to be ‘good’ or ‘poor’ when evaluated against the specific purpose of the classification. Openshaw (1983) goes on to state that as there is no single universal statistical test that can be applied to assess the quality of the classification: no classification is appropriate for all uses. This poses critical questions of national geodemographic classification as they have a plethora of potential applications, both in the public and the private sector (Singleton & Speilman, 2014). In a study by Openshaw et al. (1980) it was shown, through the comparison of a national and a local classification that the results differ drastically depending on the scale of the geodemographic classification in question. To test this hypothesis, Singleton & Longley (2015) conducted a study that would compare national and regional geodemographics. In this study Singleton & Longley (2015) created a London based classification, using the method that was used to create the OAC developed by the ONS, which was then compared to the national OAC. The central core of London deviated from national classification patterns the most in the study area. They also found that at a regional level, national geodemographics could smooth some of local variations in social characteristics. However, it should be noted that these findings do not undermine the legitimacy of national classification (Singleton & Speilman, 2014). Local and national classifications simply compare attributes against a different set of denominators, and are used different purposes (Singleton & Speilman, 2014).</p>
+									
+ 									
+                                   <div class="post-title">
+                                    <h2>Social consequences of geodemographics</h2> 
+                                   </div>   									
+									
+                                    <p>Connected to the idea of assuming characteristics through aggregation is the critique that examines the ability of geodemographics to adequately reflect the genuine structure of society. Goss (1995) expresses the opinion that geodemographic classifications are over-simplistic in their representation of society. Singleton & Speilman, (2014) add to this by taking the view that non-commercial geodemographic classifications lack a solid underpinning theory. Accordingly, the Singleton & Speilman, (2014) explain that this raises some serious issues in terms of validation, because without a unifying theory it remains unclear what these classifications should be measured against. The current challenge facing geodemographics is validating the fact that they do reflect true divisions in society rather than change groupings (Singleton & Speilman, 2014). </p>				
+
+                                    <p>Beyond issues of representation, there are ethical social issues that have been raised in regards geodemographics, including the theory that classifications can become self-fulfilling prophecies (Dalton & Thatcher, 2015). Dalton & Thatcher (2015) pointed out feedback loops could form where those living within an area are given choices or services based on their classification, upon which their responses and actions determine future marketing advertisement and future geodemographic classifications. In this vein, geodemographics do not necessarily just represent social structure, but they can, in fact, facilitate the spatial distribution of socioeconomic characteristics and consumption. Consequently, Dalton & Thatcher (2015) argue that geodemographic classifications not only invade the privacy of the individual but also threaten the autonomy to choose life paths and outcomes. It must, however, be kept in mind that this argument is primarily focused at commercial geodemographics rather than ones used in public policy decisions</p>										
+
+
+									
 								  
                                   <!-- You May Also Like Start -->
                                   <div class="you-may-also-like margin-top-50 margin-bottom-50">
@@ -245,7 +167,7 @@
                                      </div>
                     
                                     <div class="col-md-4 col-sm-6 col-xs-12">
-                                      <a href="../single.html"><p>Limitations of using Census datasets with Location-Allocation models</p></a>
+                                      <a href="../PythonGIS_p3.html"><p>Utilising GIS functions within Python – Part 3 – Geocoding with Geopanda</p></a>
                                      </div>
                                     
                                     </div>
